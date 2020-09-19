@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>bubble sort · Dylan&#39;s Studio</title>
+    <title>webpack share · Dylan&#39;s Studio</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -217,7 +217,7 @@
                 <a href="/">jonusis&#39;s Studio.</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">bubble sort</a>
+                <a href="#" class="post-name">webpack share</a>
             </div>
     </div>
     
@@ -247,7 +247,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            bubble sort
+            webpack share
             <!-- 404 -->
             
         </h1>
@@ -266,12 +266,12 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">1.5k</span>阅读时长: <span class="post-count reading-time">5 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">2.4k</span>阅读时长: <span class="post-count reading-time">9 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2018/12/12</span>
+                    <span class="post-intro-time">2019/06/05</span>
                     
                     <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                         <span class="iconfont-archer">&#xe602;</span>
@@ -395,33 +395,63 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <p>冒泡排序的基本思想:设想被排序的记录数组d[1….N]垂直竖立.将每个记录d[i]看作是一个气泡，那么重的气泡就会向下沉，轻的气泡就会向上升。每次都是相邻的两个气泡d[i]和d[i+1]进行比较。如果d[i]&gt;d[i+1]，那么就交换两个气泡，然后再比较d[i+1]和d[i+2]，以此类推，直到所有的气泡都有序排列。假设有如下数据需要排序：20，37，11，42，29。</p>
-<p>第一次冒泡：20 37 11 42 29<br>第二次冒泡：20 11 37 42 29<br>第三次冒泡：20 11 37 42 29<br>第四次冒泡：20 11 37 29 42</p>
-<p>那么就找到了最重的气泡42，接下来我们就可以按照同样的办法找到第二个气泡，第三个气泡，直到所有气泡。</p>
-<p>根据上面的分析，可以知道需要两层循环。第一层循环控制次数，第二次循环控制要排序的数据范围。如下所示：</p>
-<p>第0次比较第0个到第n-1个，下标控制0到n-2。<br>第1次比较第0个到第n-2个，下标控制0到n-3。<br>.<br>.<br>第i次比较第0个到第n-i-1个，下标控制0到n-i-2。<br>.<br>.<br>第n-2次比较第0个到第1个，下标控制0到0。</p>
-<p>基本冒泡排序的最好、最坏、平均情况下的时间复杂度都为O(n^2)。故算法的平均时间复杂度也为O(n^2)。但是若在某趟排序中未发现气泡位置的交换，则说明待排序的无序区中所有气泡均满足轻者在上，重者在下的原则，即为正序。则冒泡排序过程可在此趟扫描后就终止。基于这种考虑，提出了第一种改进的算法。</p>
-<hr>
-<h1 id="第一种改进：不做无用功"><a href="#第一种改进：不做无用功" class="headerlink" title="第一种改进：不做无用功"></a>第一种改进：不做无用功</h1><p>如果在某一趟循环中没有任何数据交换发生，则表明数据已经排序完毕。那么剩余的循环就不需要再执行了。比如我们的数据按照从小到大排列，那么在第一趟比较就不会有任何数据交换发生。这种改进算法如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">void BubbleSort_2(int a[], int size)</span><br><span class="line">&#123;	</span><br><span class="line">	bool bSwaped = true;</span><br><span class="line">	for (int i = 0; i &lt; size -1; i++)&#123;</span><br><span class="line">		// 每次先重置为false	</span><br><span class="line">	bSwaped = false;</span><br><span class="line">		for (int j = size - 1; j &gt; i ; j--)&#123;</span><br><span class="line">			if (a[j-1] &gt; a[j])</span><br><span class="line">			&#123;</span><br><span class="line">				int temp = a[j-1];</span><br><span class="line">				a[j-1] = a[j];</span><br><span class="line">				a[j] = temp; </span><br><span class="line"></span><br><span class="line">				bSwaped = true;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		// 如果上一次扫描没有发生交换，则说明数组已经全部有序，退出循环</span><br><span class="line"></span><br><span class="line">		if (!bSwaped)</span><br><span class="line">			break;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">	//这里用到了bool，我借用百度的话说明把~</span><br><span class="line">	//bool表示布尔型变量，也就是逻辑型变量的定义符。bool类似于float,double等，只不过float定义浮点型，double定义双精度浮点型。</span><br><span class="line">	//它具有YES值和NO值；bool只有一个字节。bool取值false和true，0为false，非0为true。（例如-1和2都是true）。</span><br></pre></td></tr></table></figure>
-<p>   从这种算法可以看出.若记录的初始状态是正序（从小到大）的.则一趟扫描即可完成排序。所需的比较和记录移动的次数分别达到最小值n- 1和0。即算法最好的时间复杂度为O(n)；若初始记录是反序（从大到小）的.则需要进行n-1趟排序，每趟排序要进行n-i次关键宇的比较，且每次比较都必须移动记录三次来达到交换记录位置。在这情况下比较和移动次数达到最大值：</p>
-<p>比较次数：Cmax= n(n-1)/2                           移动次数： Mmax=3n(n-1)/2</p>
-<p>   因此这种改进方法的最坏时间复杂度也为O(n^2)。在平均情况下.算法可能在中间的某一趟排序完后就终止，但总的比较次数仍为O(n^2).所以算法的平均时间复杂度为O(n^2)。因此，这种算法最好的时间复杂度为O(n)。平均，最坏时刻复杂度为O(n^2)。</p>
-<hr>
-<h1 id="第二种改进：记录犯罪现场"><a href="#第二种改进：记录犯罪现场" class="headerlink" title="第二种改进：记录犯罪现场"></a>第二种改进：记录犯罪现场</h1><p>在冒泡排序的每趟扫描中，记住最后一次交换发生的位置last_exchange也能有所帮助。因为该位置之前的相邻记录已经有序，故下一趟排序开始的时候，0到last­_exchange已经是有序的了，lastexchange到n-1是无序区。所以一趟排序可能使当前有序区扩充多个记录.即较大缩小无序区范围，而非递减1，以此减少排序趟数。这种算法如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">void BubbleSort_3(int a[], int size)</span><br><span class="line">&#123;</span><br><span class="line">	int lastSwapPos = 0,lastSwapPosTemp = 0;</span><br><span class="line">	for (int i = 0; i &lt; size - 1; i++)	&#123;</span><br><span class="line">		lastSwapPos = lastSwapPosTemp;</span><br><span class="line"></span><br><span class="line">		for (int j = size - 1; j &gt;lastSwapPos; j--)&#123;</span><br><span class="line">			if (a[j - 1] &gt; a[j])</span><br><span class="line">			&#123;</span><br><span class="line">				int temp = a[j - 1];</span><br><span class="line">				a[j - 1] = a[j];</span><br><span class="line">				a[j] = temp;</span><br><span class="line"></span><br><span class="line">				lastSwapPosTemp = j;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		if (lastSwapPos == lastSwapPosTemp)</span><br><span class="line">			break;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>从这种算法可以看出.若记录的初始状态是正序（从小到大）的.则一趟扫描即可完成排序.所需的关键比较和记录移动的次数分别达到最小值n- 1和0。即算法最好的时间复杂度为O(n);若初始记录是反序（从大到小）的.则需要进行n-1趟排序.每趟排序要进行n-i次关键宇的比较.且每次比较都必须移动记录三次来达到交换记录位置。在这情况下比较和移动次数达到最大值：</p>
-<p>  比较次数：Cmax=n(n-1)/2                        移动次数 Mmax=3n(n-1)/2</p>
-<p>因此.这种办法的最坏时间复杂度也为O(n^2)。在平均情况下.算法较大地改变了无序区的范围，从而减少了比较的次数，但总的比较次数仍为O(n^2).所以算法的平均时间复杂度为O(n^2)。因此算法2最好的时间复杂度为O(n)。平均，最坏时刻复杂度为O(n^2)。</p>
+        <p>   @<a href="webpack分享">TOC</a></p>
+<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><h2 id="什么是webpack？"><a href="#什么是webpack？" class="headerlink" title="什么是webpack？"></a>什么是webpack？</h2><p>   WebPack可以看做是模块打包机：它做的事情是，分析你的项目结构，找到JavaScript模块以及其它的一些浏览器不能直接运行的拓展语言（Scss，TypeScript等），并将其打包为合适的格式以供浏览器使用。其实简单来说就是，webpack就是把你写好的只有你自己认识的程序，整理翻译打包成漂亮的，大家都能看的程序。<br>   工作方式：把你的项目当做一个整体，通过一个给定的主文件（如：index.js），Webpack将从这个文件开始找到你的项目的所有依赖文件，使用loaders处理它们，最后打包为一个（或多个）浏览器可识别的JavaScript文件。</p>
+<h2 id="为什么要用webpack？"><a href="#为什么要用webpack？" class="headerlink" title="为什么要用webpack？"></a>为什么要用webpack？</h2><p>   如今的项目拥有着复杂的JavaScript代码和一大堆依赖包。为了简化开发的复杂度，前端社区涌现出了很多好的实践方法。</p>
+<ol>
+<li>模块化，让我们可以把复杂的程序细化为小的文件；</li>
+<li><p>类似于TypeScript这种在JavaScript基础上拓展的开发语言：使我们能够实现目前版本的JavaScript不能直接使用的特性，并且之后还能能装换为JavaScript文件使浏览器可以识别；还有一些scss，less等CSS预处理器不同之间的转化；</p>
+<p>这些改进确实大大的提高了我们的开发效率，但是利用它们开发的文件往往需要进行额外的处理才能让浏览器识别,而手动处理又是非常繁琐的，这就为WebPack类的工具的出现提供了需求，简而言之，就是webpack会帮助我们处理好这些浏览器的识别问题，转换成浏览器能够识别的语言。</p>
+<p><img src="/img/webpack_introduce.png" alt=""></p>
+</li>
+</ol>
+<h1 id="开始使用Webpack"><a href="#开始使用Webpack" class="headerlink" title="开始使用Webpack"></a>开始使用Webpack</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>   Webpack可以使用npm安装，新建一个空的练习文件夹（此处命名为webpack sample project），在终端中转到该文件夹后执行下述指令就可以完成安装。<br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//全局安装</span><br><span class="line">npm install -g webpack</span><br><span class="line">//检查版本号</span><br><span class="line">webpack -v</span><br><span class="line">//安装到你的项目目录</span><br><span class="line">npm install --save-dev webpack</span><br></pre></td></tr></table></figure></p>
+<h2 id="正式使用Webpack前的准备"><a href="#正式使用Webpack前的准备" class="headerlink" title="正式使用Webpack前的准备"></a>正式使用Webpack前的准备</h2><ol>
+<li><p>在上述练习文件夹中创建一个package.json文件，这是一个标准的npm说明文件，里面蕴含了丰富的信息，包括当前项目的依赖模块，自定义的脚本任务等等。在终端中使用npm init命令可以自动创建这个package.json文件.输入这个命令后，终端会问你一系列诸如项目名称，项目描述，作者等信息，但如果你不准备在npm中发布你的模块，这些问题的答案都不重要，回车默认即可。</p>
+</li>
+<li><p>package.json文件已经就绪，我们在本项目中安装Webpack作为依赖包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 安装Webpack</span><br><span class="line">npm install --save-dev webpack</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>到之前的空文件夹，并在里面创建两个文件夹,app文件夹和public文件夹，app文件夹用来存放原始数据和我们将写的JavaScript模块，public文件夹用来存放之后供浏览器读取的文件（包括使用webpack打包生成的js文件以及一个index.html文件）。接下来我们再创建三个文件:</p>
+</li>
+</ol>
+<ul>
+<li>index.html –放在public文件夹中;</li>
+<li>Greeter.js– 放在app文件夹中;</li>
+<li>main.js– 放在app文件夹中;</li>
+</ul>
+<ol start="4">
+<li>在这几个文件中加入一些基本的代码，并互相引用。</li>
+</ol>
+<h1 id="通过配置文件来使用Webpack"><a href="#通过配置文件来使用Webpack" class="headerlink" title="通过配置文件来使用Webpack"></a>通过配置文件来使用Webpack</h1><p>   Webpack拥有很多其它的比较高级的功能（比如说本文后面会介绍的loaders和plugins），这些功能其实都可以通过命令行模式实现，但是正如前面提到的，这样不太方便且容易出错的，更好的办法是定义一个配置文件，这个配置文件其实也是一个简单的JavaScript模块，我们可以把所有的与打包相关的信息放在里面。<br>   继续上面的例子来说明如何写这个配置文件，在当前练习文件夹的根目录下新建一个名为webpack.config.js的文件，我们在其中写入如下所示的简单配置代码，目前的配置主要涉及到的内容是入口文件路径和打包后文件的存放路径。<br>   对npm进行配置后可以在命令行中使用简单的npm start命令来替代上面略微繁琐的命令。在package.json中对scripts对象进行相关设置即可，设置方法如下。</p>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">\\package.json</span><br><span class="line">&#123;</span><br><span class="line">&quot;name&quot;: &quot;blog&quot;,</span><br><span class="line">&quot;version&quot;: &quot;1.0.0&quot;,</span><br><span class="line">&quot;description&quot;: &quot;&quot;,</span><br><span class="line">&quot;main&quot;: &quot;index.js&quot;,</span><br><span class="line">&quot;dependencies&quot;: &#123;</span><br><span class="line">   &quot;webpack&quot;: &quot;^4.33.0&quot;</span><br><span class="line">&#125;,</span><br><span class="line">&quot;devDependencies&quot;: &#123;&#125;,</span><br><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">   &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;,</span><br><span class="line">   &quot;start&quot;: &quot;webpack&quot;</span><br><span class="line">&#125;,</span><br><span class="line">&quot;repository&quot;: &#123;</span><br><span class="line">   &quot;type&quot;: &quot;git&quot;,</span><br><span class="line">   &quot;url&quot;: &quot;git+https://github.com/jonusis/jonusis.github.io.git&quot;</span><br><span class="line">&#125;,</span><br><span class="line">&quot;author&quot;: &quot;&quot;,</span><br><span class="line">&quot;license&quot;: &quot;ISC&quot;,</span><br><span class="line">&quot;bugs&quot;: &#123;</span><br><span class="line">   &quot;url&quot;: &quot;https://github.com/jonusis/jonusis.github.io/issues&quot;</span><br><span class="line">&#125;,</span><br><span class="line">&quot;homepage&quot;: &quot;https://github.com/jonusis/jonusis.github.io#readme&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">\\webpack.config.js</span><br><span class="line">module.exports = &#123;</span><br><span class="line">   entry:  __dirname + &quot;/app/main.js&quot;,//唯一入口文件</span><br><span class="line">   output: &#123;</span><br><span class="line">      path: __dirname + &quot;/public&quot;,//打包后的文件存放的地方</span><br><span class="line">      filename: &quot;bundle.js&quot;//打包后输出文件的文件名</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>   最后只要在终端自动运行npm run start，就可以自动打包了。</p>
+<h1 id="关于webpack-config-js的介绍"><a href="#关于webpack-config-js的介绍" class="headerlink" title="关于webpack.config.js的介绍"></a>关于webpack.config.js的介绍</h1><h2 id="入口-entry"><a href="#入口-entry" class="headerlink" title="入口(entry)"></a>入口(entry)</h2><p>   入口起点(entry point)指示 webpack 应该使用哪个模块，来作为构建其内部依赖图的开始。进入入口起点后，webpack 会找出有哪些模块和库是入口起点（直接和间接）依赖的。<br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">entry:  __dirname + &quot;/app/main.js&quot;,</span><br></pre></td></tr></table></figure></p>
+<p>   __dirname：表示获得当前文件的绝对路径。</p>
+<h2 id="出口-output"><a href="#出口-output" class="headerlink" title="出口(output)"></a>出口(output)</h2><p>   output 属性告诉 webpack 在哪里输出它所创建的 bundles，以及如何命名这些文件，默认值为 ./dist。基本上，整个应用程序结构，都会被编译到你指定的输出路径的文件夹中。你可以通过在配置中指定一个 output 字段，来配置这些处理过程：<br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">output: &#123;</span><br><span class="line">   path: __dirname + &quot;/public&quot;,//打包后的文件存放的地方</span><br><span class="line">   filename: &quot;bundle.js&quot;//打包后输出文件的文件名</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>   上面的示例中，我们通过 output.filename 和 output.path 属性，来告诉 webpack bundle 的名称，以及我们想要 bundle 生成(emit)到哪里。可能你想要了解在代码最上面导入的 path 模块是什么，它是一个 Node.js 核心模块，用于操作文件路径。</p>
+<h2 id="loader"><a href="#loader" class="headerlink" title="loader"></a>loader</h2><p>   loader 让 webpack 能够去处理那些非 JavaScript 文件（webpack 自身只理解 JavaScript）。loader 可以将所有类型的文件转换为 webpack 能够处理的有效模块，然后你就可以利用 webpack 的打包能力，对它们进行处理。比如说分析转换scss为css，或者把下一代的JS文件（ES6，ES7)转换为现代浏览器兼容的JS文件，对React的开发而言，合适的Loaders可以把React的中用到的JSX文件转换为JS文件。<br>   本质上，webpack loader 将所有类型的文件，转换为应用程序的依赖图（和最终的 bundle）可以直接引用的模块。</p>
+<p>   在更高层面，在 webpack 的配置中 loader 有两个目标：</p>
+<ol>
+<li>test 属性，用于标识出应该被对应的 loader 进行转换的某个或某些文件。</li>
+<li><p>use 属性，表示进行转换时，应该使用哪个 loader。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">\\webpack.config.js</span><br><span class="line">const config = &#123;</span><br><span class="line">   output: &#123;</span><br><span class="line">      filename: &apos;my-first-webpack.bundle.js&apos;</span><br><span class="line">   &#125;,</span><br><span class="line">   module: &#123;</span><br><span class="line">      rules: [</span><br><span class="line">         &#123; test: /\.txt$/, use: &apos;raw-loader&apos; &#125;</span><br><span class="line">      ]</span><br><span class="line">   &#125;</span><br><span class="line">&#125;;</span><br><span class="line">module.exports = config;</span><br></pre></td></tr></table></figure>
+<p>以上配置中，对一个单独的 module 对象定义了 rules 属性，里面包含两个必须属性：test 和 use。这意味着：当你碰到“「在 require()/import 语句中被解析为 ‘.txt’ 的路径」时，在你对它打包之前，先使用 raw-loader 转换一下。”<br>在 webpack 配置中定义 loader 时，要定义在 module.rules 中，而不是 rules。</p>
+</li>
+</ol>
+<h2 id="插件-plugins"><a href="#插件-plugins" class="headerlink" title="插件(plugins)"></a>插件(plugins)</h2><p>   loader 被用于转换某些类型的模块，而插件则可以用于执行范围更广的任务。插件的范围包括，从打包优化和压缩，一直到重新定义环境中的变量。插件接口功能极其强大，可以用来处理各种各样的任务。<br>   想要使用一个插件，你只需要 require() 它，然后把它添加到 plugins 数组中。多数插件可以通过选项(option)自定义。你也可以在一个配置文件中因为不同目的而多次使用同一个插件，这时需要通过使用 new 操作符来创建它的一个实例。<br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">const HtmlWebpackPlugin = require(&apos;html-webpack-plugin&apos;); // 通过 npm 安装</span><br><span class="line">const webpack = require(&apos;webpack&apos;); // 用于访问内置插件</span><br><span class="line"></span><br><span class="line">const config = &#123;</span><br><span class="line">module: &#123;</span><br><span class="line">   rules: [</span><br><span class="line">      &#123; test: /\.txt$/, use: &apos;raw-loader&apos; &#125;</span><br><span class="line">   ]</span><br><span class="line">&#125;,</span><br><span class="line">plugins: [</span><br><span class="line">   new HtmlWebpackPlugin(&#123;template: &apos;./src/index.html&apos;&#125;)</span><br><span class="line">]</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">module.exports = config;</span><br></pre></td></tr></table></figure></p>
+<p>   由于还有一些相对运用比较广的方法没提及，碍于时间原因，就暂时先不提了。可查阅资料自行了解。</p>
+<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>   webpack是一个相对运用最广泛，并且很方便的打包工具，它具有着非常清楚的模块化思想，也方便了使用者，简化了通过计算机语言审核的繁琐步骤，nodejs，（react，vue等框架）交叉嵌套使用，能大大提高工作效率。<br>   参考资料：<br>   <a href="https://www.webpackjs.com/" target="_blank" rel="noopener">官方文档</a><br>   <a href="https://www.jianshu.com/p/42e11515c10f" target="_blank" rel="noopener">入门webpack</a></p>
 
     </article>
     <!-- license  -->
     
         <div class="license-wrapper">
             <p>原文作者：<a href="http://yoursite.com">John Doe</a>
-            </p><p>原文链接：<a href="http://yoursite.com/2018/12/12/bubble-sort/">http://yoursite.com/2018/12/12/bubble-sort/</a>
-            </p><p>发表日期：<a href="http://yoursite.com/2018/12/12/bubble-sort/">December 12th 2018, 10:36:15 am</a>
-            </p><p>更新日期：<a href="http://yoursite.com/2018/12/12/bubble-sort/">December 12th 2018, 11:26:46 am</a>
+            </p><p>原文链接：<a href="http://yoursite.com/2019/06/05/webpack-share/">http://yoursite.com/2019/06/05/webpack-share/</a>
+            </p><p>发表日期：<a href="http://yoursite.com/2019/06/05/webpack-share/">June 5th 2019, 8:55:56 am</a>
+            </p><p>更新日期：<a href="http://yoursite.com/2019/06/05/webpack-share/">June 5th 2019, 10:59:26 am</a>
             </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -430,12 +460,17 @@ height:50vh;
         <li class="next">
             
                 <div class="nextSlogan">Next Post</div>
-                <a href="/2019/05/23/project summary/" title="project wxapp">
-                    <div class="nextTitle">project wxapp</div>
+                <a href="/2019/06/08/css-share/" title="css share">
+                    <div class="nextTitle">css share</div>
                 </a>
             
         </li>
         <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2019/05/25/hackathon/" title="hackathon">
+                    <div class="prevTitle">hackathon</div>
+                </a>
             
         </li>
     </ul>
@@ -553,7 +588,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#第一种改进：不做无用功"><span class="toc-number">1.</span> <span class="toc-text">第一种改进：不做无用功</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第二种改进：记录犯罪现场"><span class="toc-number">2.</span> <span class="toc-text">第二种改进：记录犯罪现场</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#介绍"><span class="toc-number">1.</span> <span class="toc-text">介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是webpack？"><span class="toc-number">1.1.</span> <span class="toc-text">什么是webpack？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要用webpack？"><span class="toc-number">1.2.</span> <span class="toc-text">为什么要用webpack？</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#开始使用Webpack"><span class="toc-number">2.</span> <span class="toc-text">开始使用Webpack</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-number">2.1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#正式使用Webpack前的准备"><span class="toc-number">2.2.</span> <span class="toc-text">正式使用Webpack前的准备</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#通过配置文件来使用Webpack"><span class="toc-number">3.</span> <span class="toc-text">通过配置文件来使用Webpack</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#关于webpack-config-js的介绍"><span class="toc-number">4.</span> <span class="toc-text">关于webpack.config.js的介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#入口-entry"><span class="toc-number">4.1.</span> <span class="toc-text">入口(entry)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#出口-output"><span class="toc-number">4.2.</span> <span class="toc-text">出口(output)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#loader"><span class="toc-number">4.3.</span> <span class="toc-text">loader</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#插件-plugins"><span class="toc-number">4.4.</span> <span class="toc-text">插件(plugins)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#结语"><span class="toc-number">5.</span> <span class="toc-text">结语</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>

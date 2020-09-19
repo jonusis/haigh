@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>bubble sort · Dylan&#39;s Studio</title>
+    <title>catalog-share · Dylan&#39;s Studio</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -217,7 +217,7 @@
                 <a href="/">jonusis&#39;s Studio.</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">bubble sort</a>
+                <a href="#" class="post-name">catalog-share</a>
             </div>
     </div>
     
@@ -247,7 +247,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            bubble sort
+            catalog-share
             <!-- 404 -->
             
         </h1>
@@ -266,12 +266,12 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">1.5k</span>阅读时长: <span class="post-count reading-time">5 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">1.8k</span>阅读时长: <span class="post-count reading-time">7 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2018/12/12</span>
+                    <span class="post-intro-time">2020/04/11</span>
                     
                     <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                         <span class="iconfont-archer">&#xe602;</span>
@@ -395,33 +395,41 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <p>冒泡排序的基本思想:设想被排序的记录数组d[1….N]垂直竖立.将每个记录d[i]看作是一个气泡，那么重的气泡就会向下沉，轻的气泡就会向上升。每次都是相邻的两个气泡d[i]和d[i+1]进行比较。如果d[i]&gt;d[i+1]，那么就交换两个气泡，然后再比较d[i+1]和d[i+2]，以此类推，直到所有的气泡都有序排列。假设有如下数据需要排序：20，37，11，42，29。</p>
-<p>第一次冒泡：20 37 11 42 29<br>第二次冒泡：20 11 37 42 29<br>第三次冒泡：20 11 37 42 29<br>第四次冒泡：20 11 37 29 42</p>
-<p>那么就找到了最重的气泡42，接下来我们就可以按照同样的办法找到第二个气泡，第三个气泡，直到所有气泡。</p>
-<p>根据上面的分析，可以知道需要两层循环。第一层循环控制次数，第二次循环控制要排序的数据范围。如下所示：</p>
-<p>第0次比较第0个到第n-1个，下标控制0到n-2。<br>第1次比较第0个到第n-2个，下标控制0到n-3。<br>.<br>.<br>第i次比较第0个到第n-i-1个，下标控制0到n-i-2。<br>.<br>.<br>第n-2次比较第0个到第1个，下标控制0到0。</p>
-<p>基本冒泡排序的最好、最坏、平均情况下的时间复杂度都为O(n^2)。故算法的平均时间复杂度也为O(n^2)。但是若在某趟排序中未发现气泡位置的交换，则说明待排序的无序区中所有气泡均满足轻者在上，重者在下的原则，即为正序。则冒泡排序过程可在此趟扫描后就终止。基于这种考虑，提出了第一种改进的算法。</p>
-<hr>
-<h1 id="第一种改进：不做无用功"><a href="#第一种改进：不做无用功" class="headerlink" title="第一种改进：不做无用功"></a>第一种改进：不做无用功</h1><p>如果在某一趟循环中没有任何数据交换发生，则表明数据已经排序完毕。那么剩余的循环就不需要再执行了。比如我们的数据按照从小到大排列，那么在第一趟比较就不会有任何数据交换发生。这种改进算法如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">void BubbleSort_2(int a[], int size)</span><br><span class="line">&#123;	</span><br><span class="line">	bool bSwaped = true;</span><br><span class="line">	for (int i = 0; i &lt; size -1; i++)&#123;</span><br><span class="line">		// 每次先重置为false	</span><br><span class="line">	bSwaped = false;</span><br><span class="line">		for (int j = size - 1; j &gt; i ; j--)&#123;</span><br><span class="line">			if (a[j-1] &gt; a[j])</span><br><span class="line">			&#123;</span><br><span class="line">				int temp = a[j-1];</span><br><span class="line">				a[j-1] = a[j];</span><br><span class="line">				a[j] = temp; </span><br><span class="line"></span><br><span class="line">				bSwaped = true;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		// 如果上一次扫描没有发生交换，则说明数组已经全部有序，退出循环</span><br><span class="line"></span><br><span class="line">		if (!bSwaped)</span><br><span class="line">			break;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">	//这里用到了bool，我借用百度的话说明把~</span><br><span class="line">	//bool表示布尔型变量，也就是逻辑型变量的定义符。bool类似于float,double等，只不过float定义浮点型，double定义双精度浮点型。</span><br><span class="line">	//它具有YES值和NO值；bool只有一个字节。bool取值false和true，0为false，非0为true。（例如-1和2都是true）。</span><br></pre></td></tr></table></figure>
-<p>   从这种算法可以看出.若记录的初始状态是正序（从小到大）的.则一趟扫描即可完成排序。所需的比较和记录移动的次数分别达到最小值n- 1和0。即算法最好的时间复杂度为O(n)；若初始记录是反序（从大到小）的.则需要进行n-1趟排序，每趟排序要进行n-i次关键宇的比较，且每次比较都必须移动记录三次来达到交换记录位置。在这情况下比较和移动次数达到最大值：</p>
-<p>比较次数：Cmax= n(n-1)/2                           移动次数： Mmax=3n(n-1)/2</p>
-<p>   因此这种改进方法的最坏时间复杂度也为O(n^2)。在平均情况下.算法可能在中间的某一趟排序完后就终止，但总的比较次数仍为O(n^2).所以算法的平均时间复杂度为O(n^2)。因此，这种算法最好的时间复杂度为O(n)。平均，最坏时刻复杂度为O(n^2)。</p>
-<hr>
-<h1 id="第二种改进：记录犯罪现场"><a href="#第二种改进：记录犯罪现场" class="headerlink" title="第二种改进：记录犯罪现场"></a>第二种改进：记录犯罪现场</h1><p>在冒泡排序的每趟扫描中，记住最后一次交换发生的位置last_exchange也能有所帮助。因为该位置之前的相邻记录已经有序，故下一趟排序开始的时候，0到last­_exchange已经是有序的了，lastexchange到n-1是无序区。所以一趟排序可能使当前有序区扩充多个记录.即较大缩小无序区范围，而非递减1，以此减少排序趟数。这种算法如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">void BubbleSort_3(int a[], int size)</span><br><span class="line">&#123;</span><br><span class="line">	int lastSwapPos = 0,lastSwapPosTemp = 0;</span><br><span class="line">	for (int i = 0; i &lt; size - 1; i++)	&#123;</span><br><span class="line">		lastSwapPos = lastSwapPosTemp;</span><br><span class="line"></span><br><span class="line">		for (int j = size - 1; j &gt;lastSwapPos; j--)&#123;</span><br><span class="line">			if (a[j - 1] &gt; a[j])</span><br><span class="line">			&#123;</span><br><span class="line">				int temp = a[j - 1];</span><br><span class="line">				a[j - 1] = a[j];</span><br><span class="line">				a[j] = temp;</span><br><span class="line"></span><br><span class="line">				lastSwapPosTemp = j;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		if (lastSwapPos == lastSwapPosTemp)</span><br><span class="line">			break;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>从这种算法可以看出.若记录的初始状态是正序（从小到大）的.则一趟扫描即可完成排序.所需的关键比较和记录移动的次数分别达到最小值n- 1和0。即算法最好的时间复杂度为O(n);若初始记录是反序（从大到小）的.则需要进行n-1趟排序.每趟排序要进行n-i次关键宇的比较.且每次比较都必须移动记录三次来达到交换记录位置。在这情况下比较和移动次数达到最大值：</p>
-<p>  比较次数：Cmax=n(n-1)/2                        移动次数 Mmax=3n(n-1)/2</p>
-<p>因此.这种办法的最坏时间复杂度也为O(n^2)。在平均情况下.算法较大地改变了无序区的范围，从而减少了比较的次数，但总的比较次数仍为O(n^2).所以算法的平均时间复杂度为O(n^2)。因此算法2最好的时间复杂度为O(n)。平均，最坏时刻复杂度为O(n^2)。</p>
+        <p>   @<a href="目录分享">TOC</a></p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>这次在修工作台的时候，我做的任务是进行一个建目录的工作，然后这次就借此进行一次分享，讲讲是怎么实现的。</p>
+<h1 id="大致思路"><a href="#大致思路" class="headerlink" title="大致思路"></a>大致思路</h1><ol>
+<li>首先得找到相应的代码位置，由于工作台代码繁琐庞杂，找到是非常不容易的。当然熟了代码就好多了。</li>
+<li>我大致查阅分析了一下网上的方法，一个是通过解析html字符串，一个是通过dom操作标签，由于工作台的代码使用的是html字符串存储文本内容，最后解析，所以我用的是第二种方法。</li>
+<li>进行编写。</li>
+</ol>
+<h1 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h1><h2 id="解析html字符串"><a href="#解析html字符串" class="headerlink" title="解析html字符串"></a>解析html字符串</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">res.content = res.content.replace(</span><br><span class="line">          /&lt;(h\d)&gt;.*?&lt;\/h\d&gt;/g,</span><br><span class="line">          (match, tag) =&gt; &#123;</span><br><span class="line">            const hash = match.replace(/&lt;.*?&gt;/g, &quot;&quot;);</span><br><span class="line">            const hashcopy = hash;</span><br><span class="line">            const char = tag;</span><br><span class="line">            const x = parseInt(char.charAt(char.length - 1), 10);</span><br><span class="line">            const len = doc.length;</span><br><span class="line">            doc.push(&#123; hash, x, hashcopy, len &#125;);</span><br><span class="line">            arr.push(x);</span><br><span class="line">            return `&lt;div class=&quot;blog-content-anchor&quot; id=&quot;$&#123;doc.length -</span><br><span class="line">              1&#125;&quot;&gt;$&#123;match&#125;&lt;/div&gt;`;</span><br><span class="line">          &#125;</span><br><span class="line">        );</span><br></pre></td></tr></table></figure>
+<p>老实说有一部分是我在网上借鉴的，因为我不会正则。</p>
+<p>首先解释一下这里的每一部分，res.contemt，是我们发送请求，返回的html字符串，我们调用replace函数，把发过来的字符串改改。</p>
+<p>其次是后面那一堆乱七八糟的，是正则表达式，意思是，获取所有h1-h5标签开头和结尾的字符串。然后调用后面的函数。那个函数有两个参数，match是相匹配的那个字符串(含标签)，tag是标签就是表示它是h1-h5的哪个。(可以console一下看看)</p>
+<p>然后我们定义了两个数组，一个叫arr，一个叫doc，doc是我们要传到组件里的，arr是我们要进行排序的。</p>
+<p>为什么要排序呢？因为我们传的那些字符串，做成目录，是要进行缩进的，而缩进的位置，是一个相对位置，如果一组标签里面没有h1，是从h2开始的，那么这个h2标签前面就不会有缩进。</p>
+<p>最后是那个返回值，是为了把原来的h1-h5的标签替换成新的具有id属性的标签，为什么要有这个属性呢，是为了点击目录时能跳转。</p>
+<h2 id="排序和去重"><a href="#排序和去重" class="headerlink" title="排序和去重"></a>排序和去重</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">// 解析html字符串，获取h1-h5标签，并将其排序存入数组里除重</span><br><span class="line">for (let i = 0; i &lt; arr.length; i++) &#123;</span><br><span class="line">    if (arr1.indexOf(arr[i]) === -1) &#123;</span><br><span class="line">    arr1.push(arr[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">// 删掉空格字符串</span><br><span class="line">for (let i = 0; i &lt; doc.length; i++) &#123;</span><br><span class="line">    const char = doc[i].hash.split(&quot;&amp;amp;&quot;);</span><br><span class="line">    const ResultString = char.join(&quot;&amp;&quot;);</span><br><span class="line">    doc[i].hash = ResultString;</span><br><span class="line">    if (doc[i].hash === &quot;&quot;) doc.splice(i, 1);</span><br><span class="line">&#125;</span><br><span class="line">for (let i = 0; i &lt; doc.length; i++) &#123;</span><br><span class="line">    const char = doc[i].hash.split(&quot;&amp;nbsp;&quot;);</span><br><span class="line">    const ResultString = char.join(&quot;&quot;);</span><br><span class="line">    doc[i].hash = ResultString;</span><br><span class="line">    if (doc[i].hash === &quot;&quot;) doc.splice(i, 1);</span><br><span class="line">&#125;</span><br><span class="line">arr1.sort();</span><br><span class="line">for (let i = 0; i &lt; doc.length; i++) &#123;</span><br><span class="line">    for (let j = 0; j &lt; arr1.length; j++) &#123;</span><br><span class="line">    if (arr1[j] === doc[i].x) &#123;</span><br><span class="line">        doc[i].x = j;</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>到了这一步，我们知道这个arr可能存了所有的1-5的数字(如果没有h1，这个数组里面就没有1，跟原先的标签有关)，然后我们去重，只保留相同的。放入新数组arr1，然后把arr1进行排序。如果成功的话，那么整个数组可能就是排好序的无重的1-5.</p>
+<p>然后那个doc数组，可能存在一些空格字符串的问题，所以我们要把这个数组中的空格字符串删除，如果删除了这个空格字符串，整个元素为空，我们就要把这个元素剔除。同理还有一些杂七杂八的字符比如‘&amp;’都要删掉或者替换掉。</p>
+<p>关于最后一个方法，是我关于刚刚说的缩进问题的解决途径，举个例子，原先的arr数组中是(2,3,2,2,4,5)那么排好序的arr1为(2,3,4,5),然后在doc中根据它的一个元素属性x(x也是一个数字和arr中是一模一样的)，去找在arr1中的相对位置，比如第一个2，在arr1中是0号，所以把doc的那个x属性改成0.</p>
+<h2 id="引用和传参"><a href="#引用和传参" class="headerlink" title="引用和传参"></a>引用和传参</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;table.length &gt; 0 &amp;&amp; &lt;Catalog table=&#123;table&#125; /&gt;&#125;</span><br></pre></td></tr></table></figure>
+<p>这个其实很简单，这个table是我们传的参数，table是我们解析的html字符生成的doc数组，我换了个名字。如果table没有长度，说明不存在h1-h5，因此没必要渲染组件。这个table是我放在state里面的。</p>
+<h2 id="子组件写法"><a href="#子组件写法" class="headerlink" title="子组件写法"></a>子组件写法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">class Catalog extends React.Component &#123;</span><br><span class="line">  scrollHandler = this.bindHandleScroll.bind(this);</span><br><span class="line"></span><br><span class="line">  constructor(props) &#123;</span><br><span class="line">    super(props);</span><br><span class="line">    this.state = &#123;</span><br><span class="line">      isUnder: false</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">// 滑动监听</span><br><span class="line">  componentDidMount() &#123;</span><br><span class="line">    const content = document.getElementById(&quot;app-container&quot;);</span><br><span class="line">    content.addEventListener(&quot;scroll&quot;, this.bindHandleScroll.bind(this));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  componentWillUnmount() &#123;</span><br><span class="line">    const content = document.getElementById(&quot;app-container&quot;);</span><br><span class="line">    content.removeEventListener(&quot;scroll&quot;, this.bindHandleScroll.bind(this));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  bindHandleScroll(event) &#123;</span><br><span class="line">    // 滚动的高度(兼容多种浏览器)</span><br><span class="line">    const scrollT = event.srcElement.scrollTop;</span><br><span class="line">    const head = document.getElementById(&quot;header-contenter&quot;);</span><br><span class="line">    const catalog = document.getElementById(&quot;catalog&quot;);</span><br><span class="line">    if (scrollT &gt; 50) &#123;</span><br><span class="line">      this.setState(&#123;</span><br><span class="line">        isUnder: true</span><br><span class="line">      &#125;);</span><br><span class="line">      if (catalog) head.style.display = &quot;none&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    if (scrollT &lt; 50) &#123;</span><br><span class="line">      this.setState(&#123;</span><br><span class="line">        isUnder: false</span><br><span class="line">      &#125;);</span><br><span class="line">      head.style.display = &quot;block&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    const &#123; table &#125; = this.props;</span><br><span class="line">    const &#123; isUnder &#125; = this.state;</span><br><span class="line">    return (</span><br><span class="line">      &lt;div className=&#123;isUnder ? `trans-pos parent` : `parent`&#125; id=&quot;catalog&quot;&gt;</span><br><span class="line">        &lt;div className=&quot;title1&quot;&gt; 目录 &lt;/div&gt;</span><br><span class="line">        &#123;table.map((&#123; hash, x, len &#125;, index) =&gt; (</span><br><span class="line">          &lt;div key=&#123;index&#125; className=&quot;blog-table-item&quot;&gt;</span><br><span class="line">            &lt;a href=&#123;`#$&#123;len&#125;`&#125; onClick=&#123;e =&gt; this.bindHandleScroll(e)&#125;&gt;</span><br><span class="line">              &lt;div className=&#123;`content blog-table-item-$&#123;x&#125;`&#125;&gt;&#123;hash&#125;&lt;/div&gt;</span><br><span class="line">            &lt;/a&gt;</span><br><span class="line">          &lt;/div&gt;</span><br><span class="line">        ))&#125;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Catalog.propTypes = &#123;</span><br><span class="line">  table: PropTypes.array.isRequired</span><br><span class="line">&#125;;</span><br><span class="line">export default Catalog;</span><br></pre></td></tr></table></figure>
+<p>首先看render，我们要想组件呈现下拉时是fixed,平时是absolute，得有一个判断的标准，就是这个isUnder。然后我们把数组里的元素一个个取出来，然后生成一个个a标签herf表示跳转到相应的位置。</p>
+<p>然后是这个滑动监听，根据页面滑动位置监听函数，如果位置大于50，则把isUnder改成true，并且把顶部栏样式改成none,反之相同。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>好了，终于讲完了，老实说这个东西实在是麻烦的要死..我花了好久好久才弄明白这个怎么做的。当然可能有一些细节有所遗漏(比如一些很基础的问题我就跳过了 )，有一些优化其实可以做的更好。</p>
+<p>因为是这样的，木犀工作台是一个组织共同的产品，所以维护起来也不只是我一个人事情，万一以后我没空维护这些心血，那些小一代的成员就有了这篇博客的借鉴，至少看我的代码也没那么痛苦。</p>
+<p>当然最关键是万一以后我又要维护，我自己看不懂自己代码也有一篇博客帮助我….</p>
 
     </article>
     <!-- license  -->
     
         <div class="license-wrapper">
             <p>原文作者：<a href="http://yoursite.com">John Doe</a>
-            </p><p>原文链接：<a href="http://yoursite.com/2018/12/12/bubble-sort/">http://yoursite.com/2018/12/12/bubble-sort/</a>
-            </p><p>发表日期：<a href="http://yoursite.com/2018/12/12/bubble-sort/">December 12th 2018, 10:36:15 am</a>
-            </p><p>更新日期：<a href="http://yoursite.com/2018/12/12/bubble-sort/">December 12th 2018, 11:26:46 am</a>
+            </p><p>原文链接：<a href="http://yoursite.com/2020/04/11/catalog-share/">http://yoursite.com/2020/04/11/catalog-share/</a>
+            </p><p>发表日期：<a href="http://yoursite.com/2020/04/11/catalog-share/">April 11th 2020, 9:50:06 am</a>
+            </p><p>更新日期：<a href="http://yoursite.com/2020/04/11/catalog-share/">April 11th 2020, 1:07:13 pm</a>
             </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -430,12 +438,17 @@ height:50vh;
         <li class="next">
             
                 <div class="nextSlogan">Next Post</div>
-                <a href="/2019/05/23/project summary/" title="project wxapp">
-                    <div class="nextTitle">project wxapp</div>
+                <a href="/2020/09/19/annual-report-1/" title="">
+                    <div class="nextTitle">[Untitled Post]</div>
                 </a>
             
         </li>
         <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2020/02/16/first-share/" title="first-share">
+                    <div class="prevTitle">first-share</div>
+                </a>
             
         </li>
     </ul>
@@ -553,7 +566,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#第一种改进：不做无用功"><span class="toc-number">1.</span> <span class="toc-text">第一种改进：不做无用功</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第二种改进：记录犯罪现场"><span class="toc-number">2.</span> <span class="toc-text">第二种改进：记录犯罪现场</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#大致思路"><span class="toc-number">2.</span> <span class="toc-text">大致思路</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#具体实现"><span class="toc-number">3.</span> <span class="toc-text">具体实现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#解析html字符串"><span class="toc-number">3.1.</span> <span class="toc-text">解析html字符串</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#排序和去重"><span class="toc-number">3.2.</span> <span class="toc-text">排序和去重</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#引用和传参"><span class="toc-number">3.3.</span> <span class="toc-text">引用和传参</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#子组件写法"><span class="toc-number">3.4.</span> <span class="toc-text">子组件写法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>

@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="John Doe">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="John Doe">
+    
+    <meta name="keywords" content="Dylan's home,hexo-theme,hexo-blog">
+    
+    <meta name="description" content="">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>sorting algorithm share-2 · Dylan&#39;s Studio</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href="/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href="/assets/favicon.ico">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js" as="script">
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin="">
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin="">
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/">jonusis&#39;s Studio.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">sorting algorithm share-2</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href="/">jonusis's Studio.</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            sorting algorithm share-2
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">1.9k</span>阅读时长: <span class="post-count reading-time">7 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2019/10/23</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <p> @<a href="进阶排序算法分享">TOC</a></p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>  前面一部分描述了关于简单排序和希尔排序的具体方式，但是对于一些复杂排序并没有提及，下面将详细讲述复杂排序的算法过程和代码实现。</p>
+<h1 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h1><p>  先以一篇博客作为引例。<a href="https://blog.csdn.net/code_AC/article/details/74158681" target="_blank" rel="noopener">快速排序基本思路（通俗易懂+例子）</a></p>
+<p>  文章中使用的快速排序的基本方法是先从左往右遍历，再交换再从右往左遍历，做交换。<br>  而实际上真正的实现的快速排序的流程并不是这样的。</p>
+<p>  <a href="https://blog.csdn.net/qq_36528114/article/details/78667034" target="_blank" rel="noopener">常见快速排序算法</a></p>
+<p>  由此可见，快速排序有着非常丰富的算法思想在里面。分而治之，挖坑填数。</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">  //放一些在博客里面找到的代码 </span><br><span class="line">  </span><br><span class="line">  // 左右指针法</span><br><span class="line">  int PartSort(int* array,int left,int right)</span><br><span class="line">&#123;</span><br><span class="line">	int&amp; key = array[right];</span><br><span class="line">	while(left &lt; right)</span><br><span class="line">	&#123;</span><br><span class="line">		while(left &lt; right &amp;&amp; array[left] &lt;= key)</span><br><span class="line">		&#123;</span><br><span class="line">			++left;</span><br><span class="line">		&#125;</span><br><span class="line">		while(left &lt; right &amp;&amp; array[right] &gt;= key)</span><br><span class="line">		&#123;</span><br><span class="line">			--right;</span><br><span class="line">		&#125;</span><br><span class="line">		swap(array[left],array[right]);</span><br><span class="line">	&#125;</span><br><span class="line">	swap(array[left],key);</span><br><span class="line">	return left;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//挖坑法</span><br><span class="line"></span><br><span class="line">int PartSort(int* array,int left,int right)</span><br><span class="line">&#123;</span><br><span class="line">	int key = array[right];</span><br><span class="line">	while(left &lt; right)</span><br><span class="line">	&#123;</span><br><span class="line">		while(left &lt; right &amp;&amp; array[left] &lt;= key)</span><br><span class="line">		&#123;</span><br><span class="line">			++left;</span><br><span class="line">		&#125;</span><br><span class="line">		array[right] = array[left];</span><br><span class="line">		while(left &lt; right &amp;&amp; array[right] &gt;= key)</span><br><span class="line">		&#123;</span><br><span class="line">			--right;</span><br><span class="line">		&#125;</span><br><span class="line">		array[left] = array[right];	 </span><br><span class="line">	&#125;</span><br><span class="line">	array[right] = key;</span><br><span class="line">	return right;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h1><p>归并排序相对理解起来比快速排序要直接简单，下面先上博客</p>
+<p><a href="https://blog.csdn.net/qq_40907279/article/details/81607634" target="_blank" rel="noopener">归并排序-从入门到放弃</a></p>
+<p>归并排序更复杂在于其代码的实现和理解。下面是一段标准的归并排序代码。<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line">  #include&lt;cstdio&gt;</span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"> </span><br><span class="line"> //将左右两部分归并</span><br><span class="line">void merge(int a[],int l,int r,int mid)</span><br><span class="line">&#123;</span><br><span class="line">  int aux[r-l+1],i,j,k;</span><br><span class="line"></span><br><span class="line">  //新建一个空数组，把要排序的数组元素移到一个新数组中。</span><br><span class="line">  for(k=l;k&lt;=r;k++)</span><br><span class="line">  aux[k-l]=a[k];</span><br><span class="line">  </span><br><span class="line">  //i为右边元素位序，j为左边元素位序</span><br><span class="line">  i=l;</span><br><span class="line">  j=mid+1;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  for(k=l;k&lt;=r;k++)</span><br><span class="line">  &#123;</span><br><span class="line">  	if(i&gt;mid)</span><br><span class="line">  	&#123;</span><br><span class="line">  		a[k]=aux[j-l];</span><br><span class="line">  		j++;</span><br><span class="line">	  &#125;</span><br><span class="line">	else if(j&gt;r)</span><br><span class="line">	&#123;</span><br><span class="line">		a[k]=aux[i-l];</span><br><span class="line">		i++;</span><br><span class="line">	  &#125;</span><br><span class="line">	else if(aux[i-l]&gt;aux[j-l])</span><br><span class="line">	&#123;</span><br><span class="line">		a[k]=aux[j-l];</span><br><span class="line">		j++;</span><br><span class="line">		&#125;</span><br><span class="line">	else</span><br><span class="line">	&#123;</span><br><span class="line">		a[k]=aux[i-l];</span><br><span class="line">		i++;</span><br><span class="line">			&#125;</span><br><span class="line">	  &#125;	</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"> //归并排序主体</span><br><span class="line">void merge_sort(int a[],int l,int r)</span><br><span class="line">&#123;</span><br><span class="line">    if(l&gt;=r)</span><br><span class="line">	return ;</span><br><span class="line">	</span><br><span class="line">	int mid=(l+r)/2;</span><br><span class="line">	</span><br><span class="line">	merge_sort(a,l,mid);</span><br><span class="line">	merge_sort(a,mid+1,r);</span><br><span class="line">	merge(a,l,r,mid);	</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">void mergesort(int a[],int l,int r)</span><br><span class="line">&#123;</span><br><span class="line">	merge_sort(a,l,r-1);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int a[105],n,i;</span><br><span class="line">	scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line">	</span><br><span class="line">	for(i=0;i&lt;n;i++)</span><br><span class="line">	scanf(&quot;%d&quot;,&amp;a[i]);</span><br><span class="line">	</span><br><span class="line">	mergesort(a,0,n);</span><br><span class="line">	</span><br><span class="line">	for(i=0;i&lt;n;i++)</span><br><span class="line">	printf(&quot;%d &quot;,a[i]);</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	return 0;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h1><h2 id="关于堆的知识"><a href="#关于堆的知识" class="headerlink" title="关于堆的知识"></a>关于堆的知识</h2><p>堆排序是利用堆这种数据结构而设计的一种排序算法，堆排序是一种选择排序，它的最坏，最好，平均时间复杂度均为O(nlogn)，它也是不稳定排序。</p>
+<p>堆是具有以下性质的完全二叉树：</p>
+<ul>
+<li><p>每个结点的值都大于或等于其左右孩子结点的值，称为大根堆；</p>
+</li>
+<li><p>或者每个结点的值都小于或等于其左右孩子结点的值，称为小根堆。如下图：</p>
+</li>
+</ul>
+<p><img src="sorting-algorithm-share-2/dui.png" alt="avatar"></p>
+<p>通过图可以比较直观的看出大根堆和小根堆的特点，需要注意的是：这种结构是对父节点-左/右孩子节点之间做的约束，而对左-右孩子节点之间并没有什么要求。</p>
+<p>另外，因为堆的结构是完全二叉树，所以可以用数组来存储，并通过节点下标的规律快速进行索引。</p>
+<p>下面是上图大根堆与小根堆对应的数组：</p>
+<p><img src="sorting-algorithm-share-2/dui-1.png" alt="avatar"></p>
+<h2 id="堆排序基本思想图解"><a href="#堆排序基本思想图解" class="headerlink" title="堆排序基本思想图解"></a>堆排序基本思想图解</h2><p>堆排序的过程如下：</p>
+<p>（1）初始化堆；</p>
+<p>因为堆是对父节点-左/右孩子节点之间的约束，所以从最后一个非叶子节点开始调整。</p>
+<p><img src="sorting-algorithm-share-2/dui-2.png" alt="avatar"></p>
+<p>注意每次交换后，都要对下一层的子堆进行递归调整，因为交换后有可能破坏已调整子堆的结构。</p>
+<p>（2）进行调整后，堆顶元素（array[0]）为最大值，将最大值与堆尾部元素（array[count-1]）交换，并将count值减去1，则此时得到新的无序数组array[count]，此时的堆被破坏；</p>
+<p><img src="sorting-algorithm-share-2/dui-3.png" alt="avatar"></p>
+<p>对应到数组元素为：</p>
+<p><img src="sorting-algorithm-share-2/dui-4.png" alt="avatar"></p>
+<p>（3）调整堆：与建堆过程类似，堆顶元素被一个比较小的值代替，所以从堆顶元素开始调整，在堆顶、堆顶的左孩子、堆顶的右孩子中找出最大的与堆顶进行交换，被交换的元素再次与他下一层的左右孩子进行比较（递归）调整。</p>
+<p><img src="sorting-algorithm-share-2/dui-5.png" alt="avatar"></p>
+<p>（4）重复（2）。</p>
+<p>下面把整个过程画完：</p>
+<p><img src="sorting-algorithm-share-2/dui-6.png" alt="avatar"></p>
+<p>此时，大概的一个手工过程就懂了，注意的是：初始化堆是基础，时从下向上调整。交换后调整堆时因为有了建堆的基础，每次调整的都是二叉树的一支子树，是从上往下。</p>
+<h1 id="基数排序"><a href="#基数排序" class="headerlink" title="基数排序"></a>基数排序</h1><p>直接上博客<a href="https://blog.csdn.net/weixin_30532369/article/details/99521427" target="_blank" rel="noopener">排序算法（八）——基数排序</a></p>
+<p>如博客所说，基数排序是改良版的桶排序，是多关键词排序，分为最高位优先(Most Significant Digit first)法，简称MSD 法和最低位优先(Least Significant Digit first)法，简称LSD 。</p>
+<p>放代码方便以后查询。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* name:基数排序</span><br><span class="line">* time:15/8/16 15:00</span><br><span class="line">* environment: ubuntu 14.04， sublime text 3</span><br><span class="line">*/</span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"> </span><br><span class="line">/*</span><br><span class="line">* 打印数组</span><br><span class="line">*/</span><br><span class="line">void printArray(int array[],int length)</span><br><span class="line">&#123;</span><br><span class="line">	for (int i = 0; i &lt; length; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; array[i] &lt;&lt; &quot; &quot;;</span><br><span class="line">	&#125;</span><br><span class="line">	cout &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line">/*</span><br><span class="line">*求数据的最大位数,决定排序次数</span><br><span class="line">*/</span><br><span class="line">int maxbit(int data[], int n) </span><br><span class="line">&#123;</span><br><span class="line">    int d = 1; //保存最大的位数</span><br><span class="line">    int p = 10;</span><br><span class="line">    for(int i = 0; i &lt; n; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        while(data[i] &gt;= p)</span><br><span class="line">        &#123;</span><br><span class="line">            p *= 10;</span><br><span class="line">            ++d;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return d;</span><br><span class="line">&#125;</span><br><span class="line">void radixsort(int data[], int n) //基数排序</span><br><span class="line">&#123;</span><br><span class="line">    int d = maxbit(data, n);</span><br><span class="line">    int tmp[n];</span><br><span class="line">    int count[10]; //计数器</span><br><span class="line">    int i, j, k;</span><br><span class="line">    int radix = 1;</span><br><span class="line">    for(i = 1; i &lt;= d; i++) //进行d次排序</span><br><span class="line">    &#123;</span><br><span class="line">        for(j = 0; j &lt; 10; j++)</span><br><span class="line">            count[j] = 0; //每次分配前清空计数器</span><br><span class="line">        for(j = 0; j &lt; n; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            k = (data[j] / radix) % 10; //统计每个桶中的记数</span><br><span class="line">            count[k]++;</span><br><span class="line">        &#125;</span><br><span class="line">        for(j = 1; j &lt; 10; j++)</span><br><span class="line">        count[j] = count[j - 1] + count[j]; //将tmp中的位置依次分配给每个桶</span><br><span class="line">        for(j = n - 1; j &gt;= 0; j--) //将所有桶中记录依次收集到tmp中</span><br><span class="line">        &#123;</span><br><span class="line">            k = (data[j] / radix) % 10;</span><br><span class="line">            tmp[count[k] - 1] = data[j];</span><br><span class="line">            count[k]--;</span><br><span class="line">        &#125;</span><br><span class="line">        for(j = 0; j &lt; n; j++) //将临时数组的内容复制到data中</span><br><span class="line">            data[j] = tmp[j];</span><br><span class="line">        radix = radix * 10;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int array[10] = &#123;73,22,93,43,55,14,28,65,39,81&#125;;</span><br><span class="line">	radixsort(array,10);</span><br><span class="line">	printArray(array,10);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">//结果</span><br><span class="line">//14 22 28 39 43 55 65 73 81 93</span><br></pre></td></tr></table></figure></p>
+<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>讲到这，常用的几大算法已经讲述完毕了。因为包含的特别广，所以讲的不够细，所以还不如把查阅的博客联合起来，也方便以后对这些排序有所模糊时，重新学习了解。</p>
+<p>其实我认为真正掌握算法还是得去编一遍这些算法，自己走一遍流程，才更能清楚这些步骤是怎么来的，比起模糊的调用库和网络上已经编好的现成代码，自己写一遍才能算真正理解这些算法的核心思想。</p>
+<p>ps：回头如果有时间的话，会把自己的编的算法推到git上，望监督！</p>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者：<a href="http://yoursite.com">John Doe</a>
+            </p><p>原文链接：<a href="http://yoursite.com/2019/10/23/sorting-algorithm-share-2/">http://yoursite.com/2019/10/23/sorting-algorithm-share-2/</a>
+            </p><p>发表日期：<a href="http://yoursite.com/2019/10/23/sorting-algorithm-share-2/">October 23rd 2019, 5:54:38 pm</a>
+            </p><p>更新日期：<a href="http://yoursite.com/2019/10/23/sorting-algorithm-share-2/">October 24th 2019, 5:46:43 pm</a>
+            </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href="/2019/11/01/dom-share/" title="dom share">
+                    <div class="nextTitle">dom share</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2019/09/21/muxi-auth-fe-share/" title="muxi-auth-fe share">
+                    <div class="prevTitle">muxi-auth-fe share</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:1624100548@qq.com" class="iconfont-archer email" title="email"></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/jonusis" class="iconfont-archer github" target="_blank" title="github"></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title="wechat">
+                  
+                  <img class="profile-qr" src="/assets/example_qr.png">
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#快速排序"><span class="toc-number">2.</span> <span class="toc-text">快速排序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#归并排序"><span class="toc-number">3.</span> <span class="toc-text">归并排序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#堆排序"><span class="toc-number">4.</span> <span class="toc-text">堆排序</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#关于堆的知识"><span class="toc-number">4.1.</span> <span class="toc-text">关于堆的知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#堆排序基本思想图解"><span class="toc-number">4.2.</span> <span class="toc-text">堆排序基本思想图解</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#基数排序"><span class="toc-number">5.</span> <span class="toc-text">基数排序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#结语"><span class="toc-number">6.</span> <span class="toc-text">结语</span></a></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 15
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/19</span><a class="archive-post-title" href="/2020/09/19/hello-world/">Hello World</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/19</span><a class="archive-post-title" href="/2020/09/19/annual-report-1/">[Untitled Post]</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/11</span><a class="archive-post-title" href="/2020/04/11/catalog-share/">catalog-share</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/16</span><a class="archive-post-title" href="/2020/02/16/first-share/">first-share</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/14</span><a class="archive-post-title" href="/2020/02/14/secd-share/">sec-share</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2019 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/01</span><a class="archive-post-title" href="/2019/11/01/dom-share/">dom share</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/23</span><a class="archive-post-title" href="/2019/10/23/sorting-algorithm-share-2/">sorting algorithm share-2</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/21</span><a class="archive-post-title" href="/2019/09/21/muxi-auth-fe-share/">muxi-auth-fe share</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href="/2019/06/08/css-share/">css share</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href="/2019/06/05/webpack-share/">webpack share</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/25</span><a class="archive-post-title" href="/2019/05/25/hackathon/">hackathon</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/23</span><a class="archive-post-title" href="/2019/05/23/newpage/">newpage</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/23</span><a class="archive-post-title" href="/2019/05/23/sorting-algorithm-share/">sorting algorithm share</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/23</span><a class="archive-post-title" href="/2019/05/23/project summary/">project wxapp</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/12</span><a class="archive-post-title" href="/2018/12/12/bubble-sort/">bubble sort</a>
+        </li>
+    
+    </ul></div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br>
+    1、请确保node版本大于6.2<br>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "John Doe"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+

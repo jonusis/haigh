@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Dylan&#39;s Studio</title>
+    <title>dom share · Dylan&#39;s Studio</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -203,12 +203,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/">jonusis&#39;s Studio.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">dom share</a>
+            </div>
+    </div>
     
     <a class="home-link" href="/">jonusis's Studio.</a>
 </header>
@@ -220,24 +231,68 @@
 
 
 
+
+height:50vh;
 ">
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+            dom share
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">979</span>阅读时长: <span class="post-count reading-time">3 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2019/11/01</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -338,298 +393,126 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2020/09/19/hello-world/">
-            
-                <span>Hello World</span>
-        </a>
-        <div class="abstract-content">
-            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post1$ hexo new "My New Post"
-More info: Writing
-Run server1$ hexo server
-More...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/09/19</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>   @<a href="js-dom操作">TOC</a></p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>DOM（Document Object Model ，文档对象模型）一种独立于语言，用于操作xml，html文档的应用编程接口。</p>
+<p>　　从两个角度理解：</p>
+<ul>
+<li>对于JavaScript，为了能够使JavaScript操作Html，JavaScript就有了一套自己的dom编程接口。</li>
+<li>对于Html，dom使得html形成一棵dom树，类似于一颗家族树一样，一层接一层，子子孙孙。</li>
+</ul>
+<h1 id="dom树"><a href="#dom树" class="headerlink" title="dom树"></a>dom树</h1><p>html标签通过浏览器的解析后才会形成dom树，此后HTML中的每个标签元素，属性，文本都能看做是一个DOM的节点，JavaScript都能通过dom的提供的编程接口操作到每个节点，去了解浏览器的渲染机制能够帮助我们了解dom。</p>
+<p>举个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;dom&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;a href=&quot;www.baidu.com&quot;&gt;百度&lt;/a&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>在这样很简单的html代码中，对应的dom树的结构为：</p>
+<p><img src="dom-share/dom-tree.png" alt="avatar"></p>
+<p>有了大概的认识，就可以对这些进行操作了。</p>
+<h1 id="js的常用操作dom方法"><a href="#js的常用操作dom方法" class="headerlink" title="js的常用操作dom方法"></a>js的常用操作dom方法</h1><h2 id="获取节点："><a href="#获取节点：" class="headerlink" title="获取节点："></a>获取节点：</h2><ul>
+<li><p>document.getElementById(idName) //通过id号来获取元素，返回一个元素对象</p>
+</li>
+<li><p>document.getElementsByName(name)       //通过name属性获取id号，返回元素对象数组</p>
+</li>
+<li><p>document.getElementsByClassName(className)   //通过class来获取元素，返回元素对象数组（ie8以上才有，常用）</p>
+</li>
+<li><p>document.getElementsByTagName(tagName)       //通过标签名获取元素，返回元素对象数组</p>
+</li>
+</ul>
+<h2 id="获取-设置元素的属性值："><a href="#获取-设置元素的属性值：" class="headerlink" title="获取/设置元素的属性值："></a>获取/设置元素的属性值：</h2><ul>
+<li><p>element.getAttribute(attributeName)     //括号传入属性名，返回对应属性的属性值</p>
+</li>
+<li><p>element.setAttribute(attributeName,attributeValue)    //传入属性名及设置的值</p>
+</li>
+</ul>
+<h2 id="创建节点Node："><a href="#创建节点Node：" class="headerlink" title="创建节点Node："></a>创建节点Node：</h2><ul>
+<li><p>document.createElement(“h3”)       //创建一个html元素，这里以创建h3元素为例</p>
+</li>
+<li><p>document.createTextNode(String); //创建一个文本节点；</p>
+</li>
+<li><p>document.createAttribute(“class”); //创建一个属性节点，这里以创建class属性为例</p>
+</li>
+</ul>
+<h2 id="增添节点"><a href="#增添节点" class="headerlink" title="增添节点"></a>增添节点</h2><ul>
+<li><p>element.appendChild(Node);   //往element内部最后面添加一个节点，参数是节点类型</p>
+</li>
+<li><p>elelment.insertBefore(newNode,existingNode); //在element内部的中在existingNode前面插入newNode</p>
+</li>
+</ul>
+<h2 id="删除节点："><a href="#删除节点：" class="headerlink" title="删除节点："></a>删除节点：</h2><ul>
+<li>element.removeChild(Node)    //删除当前节点下指定的子节点，删除成功返回该被删除的节点，否则返回null</li>
+</ul>
+<h1 id="dom操作常用属性"><a href="#dom操作常用属性" class="headerlink" title="dom操作常用属性:"></a>dom操作常用属性:</h1><h2 id="获取当前元素的父节点、子节点："><a href="#获取当前元素的父节点、子节点：" class="headerlink" title="获取当前元素的父节点、子节点："></a>获取当前元素的父节点、子节点：</h2><ul>
+<li><p>element.parentNode     //返回当前元素的父节点对象</p>
+</li>
+<li><p>element.chlidren        //返回当前元素所有子元素节点对象，只返回HTML节点</p>
+</li>
+<li><p>element.chilidNodes   //返回当前元素多有子节点，包括文本，HTML，属性节点。（回车也会当做一个节点）</p>
+</li>
+<li><p>element.firstChild      //返回当前元素的第一个子节点对象</p>
+</li>
+<li><p>lement.lastChild       //返回当前元素的最后一个子节点对象</p>
+</li>
+</ul>
+<h2 id="获取当前元素的文本："><a href="#获取当前元素的文本：" class="headerlink" title="获取当前元素的文本："></a>获取当前元素的文本：</h2><ul>
+<li><p>element.innerHTML   //返回元素的所有文本，包括html代码</p>
+</li>
+<li><p>element.innerText     //返回当前元素的自身及子代所有文本值，只是文本内容，不包括html代码</p>
+</li>
+</ul>
+<h2 id="设置样式"><a href="#设置样式" class="headerlink" title="设置样式"></a>设置样式</h2><ul>
+<li>element.style.color=“#eea”;      //设置元素的样式时使用style，这里以设置文字颜色为例。</li>
+</ul>
+<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">var box=document.getElementById(&quot;box&quot;);</span><br><span class="line">box.style.width=&quot;100px&quot;;</span><br><span class="line">box.style.backgroundColor=&quot;#ff00000&quot;//带有段横线的属性要是用驼峰命名的方式。</span><br></pre></td></tr></table></figure>
+<p>这个例子主要是设置id为box的样式。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var items=document.getElementsByTagName(&quot;li&quot;);</span><br><span class="line">alert(items.length);//3</span><br><span class="line">alert(document.getElementsByTagName(“*”));//12</span><br></pre></td></tr></table></figure></p>
+<p>document.getElementsByTagName</p>
+<p>返回值：一个对象数组。这个数组里每个元素都是对象，每个对象分别对应着文档里给定标签的一个元素。<br>注：这个方法可和一般元素关联。这个方法允许我们把通配符当作它的参数，返回在某份html文档里总共有多少个元素节点。</p>
+<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>就大概讲述这几个例子，剩余的例子可以在网上，或者自己手动测试。</p>
+<p>相信大家会发现一些好玩的操作哟。</p>
+
     </article>
+    <!-- license  -->
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2020/09/19/annual-report-1/">
-            
-                <span>[Untitled Post]</span>
-        </a>
-        <div class="abstract-content">
-            今天是2018年12月22日，离明年只有9天了，很高兴，在高考结束后，能考到这个学校，认识木犀的好朋友们，一起度过了4个月的时光。
-其实之前只是听说过木犀，偶然在网上翻翻找找，觉得很不错，就抱着试试看的心情，经历了面试、笔试，加入了团队。冒着不知道什么时候被踢掉的风险，成为了实习生。刚开始的时候，谁也不认识，就想着，大一多学点东西，先是偶尔做做写网页的题，觉得很有趣，很轻松。开始啥也不懂，就只会在网上一通乱搜，套进去可以就完事，不可以换一个接着套，哈。毕竟不怎么会写网页，什么模型也不清楚，能实现效果就满意了。呆的久了，跟同组的自然熟了，互相copy一下，偷偷瞄俩眼，也能偶尔捣鼓捣鼓出个所...
+        <div class="license-wrapper">
+            <p>原文作者：<a href="http://yoursite.com">John Doe</a>
+            </p><p>原文链接：<a href="http://yoursite.com/2019/11/01/dom-share/">http://yoursite.com/2019/11/01/dom-share/</a>
+            </p><p>发表日期：<a href="http://yoursite.com/2019/11/01/dom-share/">November 1st 2019, 9:19:43 am</a>
+            </p><p>更新日期：<a href="http://yoursite.com/2019/11/01/dom-share/">November 1st 2019, 5:37:31 pm</a>
+            </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/09/19</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2020/04/11/catalog-share/">
-            
-                <span>catalog-share</span>
-        </a>
-        <div class="abstract-content">
-               @TOC
-简介这次在修工作台的时候，我做的任务是进行一个建目录的工作，然后这次就借此进行一次分享，讲讲是怎么实现的。
-大致思路
-首先得找到相应的代码位置，由于工作台代码繁琐庞杂，找到是非常不容易的。当然熟了代码就好多了。
-我大致查阅分析了一下网上的方法，一个是通过解析html字符串，一个是通过dom操作标签，由于工作台的代码使用的是html字符串存储文本内容，最后解析，所以我用的是第二种方法。
-进行编写。
-
-具体实现解析html字符串1234567891011121314res.content = res.content.replace(          /&lt;(h\d)&g...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/04/11</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2020/02/16/first-share/">
-            
-                <span>first-share</span>
-        </a>
-        <div class="abstract-content">
-               @TOC
-canvas简介本次决定讲一下canvas，作为分享的主题。
-概念什么是canvas？
-
-HTML5canvas元素用于图形的绘制，通过脚本 (通常是JavaScript)来完成.
-
-canvas标签只是图形容器，您必须使用脚本来绘制图形。
-
-你可以通过多种方法使用 canvas 绘制路径,盒、圆、字符以及添加图像。
-
-
-个人理解：大概类似一种画布，在画布上进行绘制图形，线段等等。而且是通过js操作的，于是可以和js语句结合起来，应用是非常广的。
-简单操作想要做一个画布，其实很简单，只需要一个标签即可。1&lt;canvas id=&quot;myCanvas&quot;...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/02/16</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2020/02/14/secd-share/">
-            
-                <span>sec-share</span>
-        </a>
-        <div class="abstract-content">
-               @TOC
-简介之前在思考如何做哪个方面的分享，想起刚刚做的项目，其实可以做关于做一些技术实现的分享。
-html2canvas转图片实现原理首先，做的项目是一个基于原生html，css，js进行打包的h5页面。我们想实现的效果是把一个页面的样子变成图片，供大家下载保存。所以需要用HTML2canvas插件来进行操作。
-但是由于图片跨域问题，不得不用creat-react-app来打包，最后实现效果即可。
-主要靠一段代码：123456789101112131415161718192021import html2canvas from &quot;html2canvas&quot;;im...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/02/14</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/11/01/dom-share/">
-            
-                <span>dom share</span>
-        </a>
-        <div class="abstract-content">
-               @TOC
-简介DOM（Document Object Model ，文档对象模型）一种独立于语言，用于操作xml，html文档的应用编程接口。
-　　从两个角度理解：
-
-对于JavaScript，为了能够使JavaScript操作Html，JavaScript就有了一套自己的dom编程接口。
-对于Html，dom使得html形成一棵dom树，类似于一颗家族树一样，一层接一层，子子孙孙。
-
-dom树html标签通过浏览器的解析后才会形成dom树，此后HTML中的每个标签元素，属性，文本都能看做是一个DOM的节点，JavaScript都能通过dom的提供的编程接口操作到每个节点，去了解浏...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/11/01</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/10/23/sorting-algorithm-share-2/">
-            
-                <span>sorting algorithm share-2</span>
-        </a>
-        <div class="abstract-content">
-             @TOC
-简介  前面一部分描述了关于简单排序和希尔排序的具体方式，但是对于一些复杂排序并没有提及，下面将详细讲述复杂排序的算法过程和代码实现。
-快速排序  先以一篇博客作为引例。快速排序基本思路（通俗易懂+例子）
-  文章中使用的快速排序的基本方法是先从左往右遍历，再交换再从右往左遍历，做交换。  而实际上真正的实现的快速排序的流程并不是这样的。
-  常见快速排序算法
-  由此可见，快速排序有着非常丰富的算法思想在里面。分而治之，挖坑填数。
-  1234567891011121314151617181920212223242526272829303132333435363738394...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/10/23</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/09/21/muxi-auth-fe-share/">
-            
-                <span>muxi-auth-fe share</span>
-        </a>
-        <div class="abstract-content">
-               @TOC
-简介  原先的通行证有很多漏洞，需要进行优化和改进。受不可抗力的原因，我得接手重构通行证的任务，原先的通行证是用vue框架构建的，重构是用react进行构建。但是原先做了手机版本和网页版本的，而react只需重构网页版本，减少了代码量。
-事前准备搭配环境
-首先，我们得先准备好一些东西：
-npm（下载nodejs时会绑定在一起下载）
-nodejs
-webpack其次，上react官网搭配环境。（此步略）
-
-
-
-整体思路个人分工  工作台重构分了3个页面：登陆界面，注册界面，找回密码界面。功能模块有很多：邮箱验证（正则表达式），邮箱button动态修改状态，输入字符出现提示词...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/09/21</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/06/08/css-share/">
-            
-                <span>css share</span>
-        </a>
-        <div class="abstract-content">
-               @TOC
-引言我们在正常的进行前端代码中，常常会遇到一些问题。而这些问题往往和我们的选择器使用有关。我将会介绍一些不怎么常用的选择器，讲讲它们是怎么使用的，以及如何才能更好优化代码。
-选择器有哪些？最常用的选择器是标签名选择器、类选择器和ID选择器。而后代选择器和群组选择器只不过是对前三种选择器的扩展应用。最基本的选择器是元素选择器(比如div),ID选择器(比如#header)还有类选择器(比如.tweet)。一些的不常见的选择器包括伪类选择器(:hover)，很多复杂的CSS3和正则选择器，比如：first-child，class ^= “grid-”。CSS选择器具有高效的继...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/06/08</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/06/05/webpack-share/">
-            
-                <span>webpack share</span>
-        </a>
-        <div class="abstract-content">
-               @TOC
-介绍什么是webpack？   WebPack可以看做是模块打包机：它做的事情是，分析你的项目结构，找到JavaScript模块以及其它的一些浏览器不能直接运行的拓展语言（Scss，TypeScript等），并将其打包为合适的格式以供浏览器使用。其实简单来说就是，webpack就是把你写好的只有你自己认识的程序，整理翻译打包成漂亮的，大家都能看的程序。   工作方式：把你的项目当做一个整体，通过一个给定的主文件（如：index.js），Webpack将从这个文件开始找到你的项目的所有依赖文件，使用loaders处理它们，最后打包为一个（或多个）浏览器可识别的JavaScr...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/06/05</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
     
     <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href="/2020/02/14/secd-share/" title="sec-share">
+                    <div class="nextTitle">sec-share</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2019/10/23/sorting-algorithm-share-2/" title="sorting algorithm share-2">
+                    <div class="prevTitle">sorting algorithm share-2</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
-    <nav class="page-nav">
-        <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/">NEXT &#62;</a>
-    </nav>
     
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -714,6 +597,24 @@ webpack其次，上react官网搭配环境。（此步略）
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#dom树"><span class="toc-number">2.</span> <span class="toc-text">dom树</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#js的常用操作dom方法"><span class="toc-number">3.</span> <span class="toc-text">js的常用操作dom方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#获取节点："><span class="toc-number">3.1.</span> <span class="toc-text">获取节点：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获取-设置元素的属性值："><span class="toc-number">3.2.</span> <span class="toc-text">获取/设置元素的属性值：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建节点Node："><span class="toc-number">3.3.</span> <span class="toc-text">创建节点Node：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#增添节点"><span class="toc-number">3.4.</span> <span class="toc-text">增添节点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#删除节点："><span class="toc-number">3.5.</span> <span class="toc-text">删除节点：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#dom操作常用属性"><span class="toc-number">4.</span> <span class="toc-text">dom操作常用属性:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#获取当前元素的父节点、子节点："><span class="toc-number">4.1.</span> <span class="toc-text">获取当前元素的父节点、子节点：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获取当前元素的文本："><span class="toc-number">4.2.</span> <span class="toc-text">获取当前元素的文本：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#设置样式"><span class="toc-number">4.3.</span> <span class="toc-text">设置样式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#例子"><span class="toc-number">5.</span> <span class="toc-text">例子</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#结语"><span class="toc-number">6.</span> <span class="toc-text">结语</span></a></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -1069,6 +970,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
      
     </body>
 </html>

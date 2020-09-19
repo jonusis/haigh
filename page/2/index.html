@@ -78,8 +78,6 @@
     <link rel="preload" href="/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="stylesheet" href="/css/mobile.css?v=20180824" media="(max-width: 980px)">
     
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -203,8 +201,10 @@
 </head>
 
     
+        <body class="home-body">
     
-<header class="header">
+    
+<header class="header index-header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
@@ -220,21 +220,34 @@
 
 
 
+
+height:50vh;
 ">
     
     <!-- 主页  -->
+    
+    
+    <!-- 文章页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/index-bg.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
+            jonusis's Studio.
+            <!-- 文章页  -->
+            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
+            
+            
+                it's better to burn out than to fade away
+            
+            <!-- 文章页  -->
             
         </p>
         <!-- 文章页meta -->
@@ -346,21 +359,17 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href="/2020/09/19/hello-world/">
+        <a class="abstract-title" href="/2019/05/25/hackathon/">
             
-                <span>Hello World</span>
+                <span>hackathon</span>
         </a>
         <div class="abstract-content">
-            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post1$ hexo new "My New Post"
-More info: Writing
-Run server1$ hexo server
-More...
+            hackathon
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/09/19</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/25</span>
             </div>
             <!-- tags  -->
             
@@ -373,18 +382,18 @@ More...
     
     
     <article class="index-post">
-        <a class="abstract-title" href="/2020/09/19/annual-report-1/">
+        <a class="abstract-title" href="/2019/05/23/newpage/">
             
-                <span>[Untitled Post]</span>
+                <span>newpage</span>
         </a>
         <div class="abstract-content">
-            今天是2018年12月22日，离明年只有9天了，很高兴，在高考结束后，能考到这个学校，认识木犀的好朋友们，一起度过了4个月的时光。
-其实之前只是听说过木犀，偶然在网上翻翻找找，觉得很不错，就抱着试试看的心情，经历了面试、笔试，加入了团队。冒着不知道什么时候被踢掉的风险，成为了实习生。刚开始的时候，谁也不认识，就想着，大一多学点东西，先是偶尔做做写网页的题，觉得很有趣，很轻松。开始啥也不懂，就只会在网上一通乱搜，套进去可以就完事，不可以换一个接着套，哈。毕竟不怎么会写网页，什么模型也不清楚，能实现效果就满意了。呆的久了，跟同组的自然熟了，互相copy一下，偷偷瞄俩眼，也能偶尔捣鼓捣鼓出个所...
+            @TOC
+���  ΢��С������������ԽϹ��С���򡣶�������дС����Ŀ��Ϊtaro������taro��һ�������Ŀ�ܣ������ڲ�������ʱ�Ǻܲ�����ģ�����û��ʲôԭ��demo�����ǲ��ģ�������������ͨ������΢��С����ٷ��ĵ���taro�ٷ��ĵ����Լ�һЩ΢��С������˵�demo��  ����ʵtaro�������react��ܵĻ����Ͻ��и�д�ġ���дС�����ʱ��������ʵ����ͨ�����ж�react�﷨��ѧϰ�����react����t...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/09/19</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/23</span>
             </div>
             <!-- tags  -->
             
@@ -397,24 +406,33 @@ More...
     
     
     <article class="index-post">
-        <a class="abstract-title" href="/2020/04/11/catalog-share/">
+        <a class="abstract-title" href="/2019/05/23/sorting-algorithm-share/">
             
-                <span>catalog-share</span>
+                <span>sorting algorithm share</span>
         </a>
         <div class="abstract-content">
                @TOC
-简介这次在修工作台的时候，我做的任务是进行一个建目录的工作，然后这次就借此进行一次分享，讲讲是怎么实现的。
-大致思路
-首先得找到相应的代码位置，由于工作台代码繁琐庞杂，找到是非常不容易的。当然熟了代码就好多了。
-我大致查阅分析了一下网上的方法，一个是通过解析html字符串，一个是通过dom操作标签，由于工作台的代码使用的是html字符串存储文本内容，最后解析，所以我用的是第二种方法。
-进行编写。
+简介  数据结构与算法是计算机核心的课程之一，也是需要仔细掌握的一个大的模块。下面将讲解几种常见的排序算法，为将来的运用打好基础。
+排序算法说明排序的定义对一个无序的序列进行排序的过程。 
 
-具体实现解析html字符串1234567891011121314res.content = res.content.replace(          /&lt;(h\d)&g...
+输入：n个数：a1,a2,a3,…,an。 
+
+输出：n个数的排列:a1,a2,a3,…,an，使得a1&lt;=a2&lt;=a3&lt;=…&lt;=an。
+
+
+排序的稳定性相同值的节点相对位置是否会发生改变。 
+
+稳定：如果a原本在b前面，而a=b，排序之后a仍然在b的前面。 
+
+不稳定：如果a原本在b的前面，而a=b，排序之后a可能会出现在b的后面。
+
+
+排序的时间复杂度和空...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/04/11</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/23</span>
             </div>
             <!-- tags  -->
             
@@ -427,148 +445,21 @@ More...
     
     
     <article class="index-post">
-        <a class="abstract-title" href="/2020/02/16/first-share/">
+        <a class="abstract-title" href="/2019/05/23/project summary/">
             
-                <span>first-share</span>
+                <span>project wxapp</span>
         </a>
         <div class="abstract-content">
                @TOC
-canvas简介本次决定讲一下canvas，作为分享的主题。
-概念什么是canvas？
-
-HTML5canvas元素用于图形的绘制，通过脚本 (通常是JavaScript)来完成.
-
-canvas标签只是图形容器，您必须使用脚本来绘制图形。
-
-你可以通过多种方法使用 canvas 绘制路径,盒、圆、字符以及添加图像。
-
-
-个人理解：大概类似一种画布，在画布上进行绘制图形，线段等等。而且是通过js操作的，于是可以和js语句结合起来，应用是非常广的。
-简单操作想要做一个画布，其实很简单，只需要一个标签即可。1&lt;canvas id=&quot;myCanvas&quot;...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/02/16</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2020/02/14/secd-share/">
-            
-                <span>sec-share</span>
-        </a>
-        <div class="abstract-content">
-               @TOC
-简介之前在思考如何做哪个方面的分享，想起刚刚做的项目，其实可以做关于做一些技术实现的分享。
-html2canvas转图片实现原理首先，做的项目是一个基于原生html，css，js进行打包的h5页面。我们想实现的效果是把一个页面的样子变成图片，供大家下载保存。所以需要用HTML2canvas插件来进行操作。
-但是由于图片跨域问题，不得不用creat-react-app来打包，最后实现效果即可。
-主要靠一段代码：123456789101112131415161718192021import html2canvas from &quot;html2canvas&quot;;im...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/02/14</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/11/01/dom-share/">
-            
-                <span>dom share</span>
-        </a>
-        <div class="abstract-content">
-               @TOC
-简介DOM（Document Object Model ，文档对象模型）一种独立于语言，用于操作xml，html文档的应用编程接口。
-　　从两个角度理解：
-
-对于JavaScript，为了能够使JavaScript操作Html，JavaScript就有了一套自己的dom编程接口。
-对于Html，dom使得html形成一棵dom树，类似于一颗家族树一样，一层接一层，子子孙孙。
-
-dom树html标签通过浏览器的解析后才会形成dom树，此后HTML中的每个标签元素，属性，文本都能看做是一个DOM的节点，JavaScript都能通过dom的提供的编程接口操作到每个节点，去了解浏...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/11/01</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/10/23/sorting-algorithm-share-2/">
-            
-                <span>sorting algorithm share-2</span>
-        </a>
-        <div class="abstract-content">
-             @TOC
-简介  前面一部分描述了关于简单排序和希尔排序的具体方式，但是对于一些复杂排序并没有提及，下面将详细讲述复杂排序的算法过程和代码实现。
-快速排序  先以一篇博客作为引例。快速排序基本思路（通俗易懂+例子）
-  文章中使用的快速排序的基本方法是先从左往右遍历，再交换再从右往左遍历，做交换。  而实际上真正的实现的快速排序的流程并不是这样的。
-  常见快速排序算法
-  由此可见，快速排序有着非常丰富的算法思想在里面。分而治之，挖坑填数。
-  1234567891011121314151617181920212223242526272829303132333435363738394...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/10/23</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/09/21/muxi-auth-fe-share/">
-            
-                <span>muxi-auth-fe share</span>
-        </a>
-        <div class="abstract-content">
-               @TOC
-简介  原先的通行证有很多漏洞，需要进行优化和改进。受不可抗力的原因，我得接手重构通行证的任务，原先的通行证是用vue框架构建的，重构是用react进行构建。但是原先做了手机版本和网页版本的，而react只需重构网页版本，减少了代码量。
+简介  微信小程序是运用相对较广的小程序。而我们所写小程序的框架为taro。由于taro是一个新生的框架，所以在查阅资料时是很不方便的，几乎没有什么原生demo给我们查阅，往往都是我们通过查阅微信小程序官方文档，taro官方文档，以及一些微信小程序别人的demo。但其实taro框架是在react框架的基础上进行改写的。在写小程序的时候，我们其实可以通过进行对react语法的学习，类比react，用taro实现react的功能。
+  而后来做的hackathon也是运用react框架进行小游戏项目的，所以两者我都相对而言比较熟悉。
 事前准备搭配环境
-首先，我们得先准备好一些东西：
-npm（下载nodejs时会绑定在一起下载）
-nodejs
-webpack其次，上react官网搭配环境。（此步略）
-
-
-
-整体思路个人分工  工作台重构分了3个页面：登陆界面，注册界面，找回密码界面。功能模块有很多：邮箱验证（正则表达式），邮箱button动态修改状态，输入字符出现提示词...
+首先，我们得先准备好一些...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/09/21</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/23</span>
             </div>
             <!-- tags  -->
             
@@ -581,43 +472,19 @@ webpack其次，上react官网搭配环境。（此步略）
     
     
     <article class="index-post">
-        <a class="abstract-title" href="/2019/06/08/css-share/">
+        <a class="abstract-title" href="/2018/12/12/bubble-sort/">
             
-                <span>css share</span>
+                <span>bubble sort</span>
         </a>
         <div class="abstract-content">
-               @TOC
-引言我们在正常的进行前端代码中，常常会遇到一些问题。而这些问题往往和我们的选择器使用有关。我将会介绍一些不怎么常用的选择器，讲讲它们是怎么使用的，以及如何才能更好优化代码。
-选择器有哪些？最常用的选择器是标签名选择器、类选择器和ID选择器。而后代选择器和群组选择器只不过是对前三种选择器的扩展应用。最基本的选择器是元素选择器(比如div),ID选择器(比如#header)还有类选择器(比如.tweet)。一些的不常见的选择器包括伪类选择器(:hover)，很多复杂的CSS3和正则选择器，比如：first-child，class ^= “grid-”。CSS选择器具有高效的继...
+            冒泡排序的基本思想:设想被排序的记录数组d[1….N]垂直竖立.将每个记录d[i]看作是一个气泡，那么重的气泡就会向下沉，轻的气泡就会向上升。每次都是相邻的两个气泡d[i]和d[i+1]进行比较。如果d[i]&gt;d[i+1]，那么就交换两个气泡，然后再比较d[i+1]和d[i+2]，以此类推，直到所有的气泡都有序排列。假设有如下数据需要排序：20，37，11，42，29。
+第一次冒泡：20 37 11 42 29第二次冒泡：20 11 37 42 29第三次冒泡：20 11 37 42 29第四次冒泡：20 11 37 29 42
+那么就找到了最重的气泡42，接下来我们就可以按照同样...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/06/08</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/06/05/webpack-share/">
-            
-                <span>webpack share</span>
-        </a>
-        <div class="abstract-content">
-               @TOC
-介绍什么是webpack？   WebPack可以看做是模块打包机：它做的事情是，分析你的项目结构，找到JavaScript模块以及其它的一些浏览器不能直接运行的拓展语言（Scss，TypeScript等），并将其打包为合适的格式以供浏览器使用。其实简单来说就是，webpack就是把你写好的只有你自己认识的程序，整理翻译打包成漂亮的，大家都能看的程序。   工作方式：把你的项目当做一个整体，通过一个给定的主文件（如：index.js），Webpack将从这个文件开始找到你的项目的所有依赖文件，使用loaders处理它们，最后打包为一个（或多个）浏览器可识别的JavaScr...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/06/05</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/12/12</span>
             </div>
             <!-- tags  -->
             
@@ -627,11 +494,108 @@ webpack其次，上react官网搭配环境。（此步略）
     <!-- paginator  -->
     
     <nav class="page-nav">
-        <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/">NEXT &#62;</a>
+        <a class="extend prev" rel="prev" href="/">&#60; PREV</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
     </nav>
     
 </main>
             <!-- profile -->
+            
+            <div class="profile">
+    <img class="profile-avatar" alt="avatar" src="/avatar/jo-kid.jpg">
+    <div class="profile-name">Dylan</div>
+    
+    <div class="profile-signature">
+        witness me
+    </div>
+    
+    
+    <div class="profile-social">
+        
+    
+        
+            
+                <a href="mailto:1624100548@qq.com" class="iconfont-archer email" title="email"></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/jonusis" class="iconfont-archer github" target="_blank" title="github"></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title="wechat">
+                  
+                  <img class="profile-qr" src="/assets/example_qr.png">
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    
+        <div class="friends">
+            <div>FRIENDS</div>
+            
+                
+                    <span>
+                        <a href="//www.baidu.com" target="_black">friendA</a>
+                    </span>
+                
+            
+                
+                    <span>
+                        <a href="//www.google.com" target="_black">friendB</a>
+                    </span>
+                
+            
+                
+            
+        </div>
+    
+    
+        <div class="about-me">
+            <a href="/about">ABOUT ME</a>
+        </div>
+    
+</div>
             
         </div>
         <footer class="footer footer-unloaded">

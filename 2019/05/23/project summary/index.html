@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="John Doe">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="John Doe">
+    
+    <meta name="keywords" content="Dylan's home,hexo-theme,hexo-blog">
+    
+    <meta name="description" content="">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>project wxapp · Dylan&#39;s Studio</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href="/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href="/assets/favicon.ico">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js" as="script">
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin="">
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin="">
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/">jonusis&#39;s Studio.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">project wxapp</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href="/">jonusis's Studio.</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            project wxapp
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">3.4k</span>阅读时长: <span class="post-count reading-time">15 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2019/05/23</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>   @<a href="项目总结">TOC</a></p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>  微信小程序是运用相对较广的小程序。而我们所写小程序的框架为taro。由于taro是一个新生的框架，所以在查阅资料时是很不方便的，几乎没有什么原生demo给我们查阅，往往都是我们通过查阅微信小程序官方文档，taro官方文档，以及一些微信小程序别人的demo。但其实taro框架是在react框架的基础上进行改写的。在写小程序的时候，我们其实可以通过进行对react语法的学习，类比react，用taro实现react的功能。</p>
+<p>  而后来做的hackathon也是运用react框架进行小游戏项目的，所以两者我都相对而言比较熟悉。</p>
+<h1 id="事前准备"><a href="#事前准备" class="headerlink" title="事前准备"></a>事前准备</h1><h2 id="搭配环境"><a href="#搭配环境" class="headerlink" title="搭配环境"></a>搭配环境</h2><ul>
+<li><p>首先，我们得先准备好一些东西：</p>
+<ol>
+<li>npm（下载nodejs时会绑定在一起下载）</li>
+<li>nodejs</li>
+<li>webpack</li>
+</ol>
+</li>
+<li><p>其次，查阅官方文档，跟着操作走<a href="https://nervjs.github.io/taro/docs/GETTING-STARTED.html" target="_blank" rel="noopener">文档地址</a>。按照文档按部就班来，就可以下载好了。我们做的微信小程序是一个拼单的小程序，通过发布拼单，展示拼单，个人信息，认证审核，登陆等等好几部分组成。可以扫描二维码来测试（但是得我通过审核..）</p>
+<p> 备注：有时在taro下载依赖时会卡住失败，建议使用yarn或者cnpm新建taro项目。</p>
+</li>
+</ul>
+<p>react项目是做一个改良版本的贪吃蛇小游戏。通过不断吃色块使自己变色，最终达到目标颜色。react的环境搭配和上述步骤差不多，我是参考了别人的文档，<a href="https://www.cnblogs.com/jerryyj/p/react01.html" target="_blank" rel="noopener">地址</a></p>
+<h1 id="整体思路"><a href="#整体思路" class="headerlink" title="整体思路"></a>整体思路</h1><h2 id="个人分工"><a href="#个人分工" class="headerlink" title="个人分工"></a>个人分工</h2><p>  微信小程序项目分为三块：首页，发起，我的。<br>  首页是展示信息页，点击信息进入详情页，详情页具有评论功能和详细信息。<br>  发起页面是发起订单的信息页，用户申请，提交信息在页面中选择。<br>  我的页面是个人信息的展示页，具有联系方式，我的订单等等选项卡。<br>  具体分工为：首页由我全部负责，发起页面由刘蛟负责。我的页面各自完成一部分。（还有登陆页面是刘姣做的，底部tab栏是我做的）</p>
+<p>  贪吃蛇小游戏分工其实没有太明确，因为功能相对简单吧<br>  我做了两个简单的页面，实现了游戏的基本功能（色块的颜色、贪吃蛇的变色）<br>  丁露洁做了顶部的计分板和优化了我一些样式功能。</p>
+<p>  由于小游戏功能偏简单，下面会先以小程序为例子进行代码讲解</p>
+<h2 id="实现功能"><a href="#实现功能" class="headerlink" title="实现功能"></a>实现功能</h2><p>  由于首页功能比较复杂，所以难度比较大，具体功能有：顶部tab选项卡（点击不同选项卡进入不同的页面）、下拉刷新、上拉加载更多、点击跳转路由、根据是否拼满动态显示已拼满、详情页中点击图片放大、详情页图片比例不变、评论、参与拼单等等功能。</p>
+<h2 id="分析思路"><a href="#分析思路" class="headerlink" title="分析思路"></a>分析思路</h2><p>  由于功能复杂，且繁多，需要划分成组件，各司其职，才看起来有条不紊。</p>
+<p>  首页部分划分的组件有：</p>
+<p>  1.顶部tab栏<br>  2.拼购选项卡<br>  3.拼车选项卡</p>
+<p>  制作的页面有：</p>
+<p>  1.首页<br>  2.详情页</p>
+<p>接下来会依次以demo实例进行讲解。</p>
+<h1 id="整体配置"><a href="#整体配置" class="headerlink" title="整体配置"></a>整体配置</h1><h2 id="tabbar、路由配置"><a href="#tabbar、路由配置" class="headerlink" title="tabbar、路由配置"></a>tabbar、路由配置</h2><p>其实很简单，只需要在刚刚新建好的taro项目内找到app.js,进行修改即可。<br><figure class="highlight plain"><figcaption><span>App extends Component &#123;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">config = &#123;</span><br><span class="line"> //这一部分是配置的页面路由</span><br><span class="line">  pages: [</span><br><span class="line">    &apos;pages/index/index&apos;,</span><br><span class="line">    &apos;pages/person/person&apos;,</span><br><span class="line">    &apos;pages/choose-order/choose&apos;,</span><br><span class="line">    &apos;pages/publish/publish&apos;,</span><br><span class="line">    &apos;pages/mine/home&apos;,</span><br><span class="line">    &apos;pages/add/detail&apos;,</span><br><span class="line">    &apos;pages/jinconnect/jinconnect&apos;,</span><br><span class="line">    &apos;pages/advice/advice&apos;,</span><br><span class="line">    &apos;pages/index/login/login&apos;,</span><br><span class="line">    &apos;pages/addcar/addcar&apos;,</span><br><span class="line">    &apos;pages/connectiontwo/connectiontwo&apos;,</span><br><span class="line">    &apos;pages/publish_two/publish_two&apos;</span><br><span class="line">  ],</span><br><span class="line">  //这一部分是界面默认顶部的样式</span><br><span class="line">  window: &#123;</span><br><span class="line">    backgroundTextStyle: &apos;light&apos;,</span><br><span class="line">    navigationBarBackgroundColor: &apos;#fff&apos;,</span><br><span class="line">    navigationBarTitleText: &apos;WeChat&apos;,</span><br><span class="line">    navigationBarTextStyle: &apos;black&apos;</span><br><span class="line">  &#125;,</span><br><span class="line">  //这里调用了taro已有的组件tabbar，即底部导航栏</span><br><span class="line">  tabBar: &#123;</span><br><span class="line">    list: [&#123;</span><br><span class="line">      pagePath: &quot;pages/index/index&quot;,</span><br><span class="line">      text: &quot;首页&quot;,</span><br><span class="line">      iconPath: &quot;./img/uiindex.png&quot;,</span><br><span class="line">      selectedIconPath: &quot;./img/uiindex-red.png&quot;</span><br><span class="line">    &#125;, &#123;</span><br><span class="line">      pagePath: &quot;pages/choose-order/choose&quot;,</span><br><span class="line">      text: &quot;发起&quot;,</span><br><span class="line">      iconPath: &quot;./img/uiplus.png&quot;,</span><br><span class="line">      selectedIconPath: &quot;./img/uiplus-red.png&quot;</span><br><span class="line">    &#125;,&#123;</span><br><span class="line">      pagePath: &quot;pages/person/person&quot;,</span><br><span class="line">      text: &quot;我的&quot;,</span><br><span class="line">      iconPath: &quot;./img/uimine.png&quot;,</span><br><span class="line">      selectedIconPath: &quot;./img/uimine-red.png&quot;</span><br><span class="line">    &#125;],</span><br><span class="line">    color: &apos;#333&apos;,</span><br><span class="line">    selectedColor: &apos;red&apos;,</span><br><span class="line">    backgroundColor: &apos;#fff&apos;,</span><br><span class="line">    borderStyle: &apos;white&apos;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>不同的项目得根据不同的需求进行更改</p>
+<hr>
+<p>这里稍微提一下我做的贪吃蛇小游戏，贪吃蛇里react配置路由和taro很不一样。这里放上代码做个对比</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; Component &#125; from &apos;react&apos;;</span><br><span class="line">import &#123; HashRouter as Router, Route, Redirect, Switch &#125; from &quot;react-router-dom&quot;;</span><br><span class="line">import Snake from &apos;../../component/Snake&apos;</span><br><span class="line">import Index from &apos;../../pages/index/index&apos;</span><br><span class="line">import Rule from &apos;../../pages/rule/index&apos;</span><br><span class="line">import Header from &apos;../../component/Header/index&apos;</span><br><span class="line">import ProgressBar from &apos;../../component/progressBar/index&apos;</span><br><span class="line">export default class Portal extends Component &#123;</span><br><span class="line">    render() &#123;</span><br><span class="line">        return (</span><br><span class="line">            &lt;Router&gt;</span><br><span class="line">                &lt;Switch&gt;</span><br><span class="line">                    &lt;Redirect exact from=&quot;/&quot; to=&quot;/index&quot; /&gt;</span><br><span class="line">                    &lt;Route path=&quot;/snake&quot; component=&#123;Snake&#125; /&gt;</span><br><span class="line">                    &lt;Route path=&quot;/index&quot; component=&#123;Index&#125; /&gt;</span><br><span class="line">                    &lt;Route path=&quot;/rule&quot; component=&#123;Rule&#125; /&gt;</span><br><span class="line">                    &lt;Route path=&quot;/header&quot; component=&#123;Header&#125; /&gt;</span><br><span class="line">                    &lt;Route path=&quot;/progressBar&quot; component=&#123;ProgressBar&#125; /&gt;</span><br><span class="line">                &lt;/Switch&gt;</span><br><span class="line">            &lt;/Router&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在别的页面只需要用一个标签就可以跳转了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; Component &#125; from &apos;react&apos;;</span><br><span class="line">import &#123;  Link &#125; from &apos;react-router-dom&apos;</span><br><span class="line">import &apos;./index.scss&apos;;</span><br><span class="line">import  &apos;../../images/snake_logo.png&apos;;</span><br><span class="line">import  &apos;../../images/button.png&apos;;</span><br><span class="line">import  &apos;../../images/detail.png&apos;;</span><br><span class="line"></span><br><span class="line">export default class Index extends Component &#123;</span><br><span class="line">    constructor(props) &#123;</span><br><span class="line">        super(props);</span><br><span class="line">        this.state = &#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    render() &#123;</span><br><span class="line">        return &lt;div &gt;</span><br><span class="line">            &lt;div className=&apos;back1&apos;&gt;</span><br><span class="line">                &lt;div className=&apos;word&apos;&gt;</span><br><span class="line">                    &lt;img src=&#123;require(&apos;../../images/snake_logo.png&apos;)&#125; alt=&apos;&apos; className=&apos;logo&apos;/&gt;</span><br><span class="line">                &lt;/div&gt;</span><br><span class="line">                &lt;Link to=&apos;/rule&apos;&gt;</span><br><span class="line">                &lt;button className=&apos;button_1&apos; &gt;</span><br><span class="line">                    &lt;img src=&#123;require(&apos;../../images/button.png&apos;)&#125; alt=&apos;&apos; className=&apos;start&apos;/&gt;</span><br><span class="line">                &lt;/button&gt;</span><br><span class="line">                &lt;/Link&gt;</span><br><span class="line">                &lt;div className=&apos;small_tab&apos;&gt;</span><br><span class="line">                    &lt;img src=&#123;require(&apos;../../images/detail.png&apos;)&#125; alt=&apos;&apos; className=&apos;detail_1&apos;/&gt;</span><br><span class="line">                &lt;/div&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="组件详情分析"><a href="#组件详情分析" class="headerlink" title="组件详情分析"></a>组件详情分析</h1><p>因为一个组件会在多处使用，所以有些部分得抽出做组件。但是由于贪吃蛇的组件较少，就主要讲讲小程序的组件吧。</p>
+<h2 id="小程序顶部tab栏组件"><a href="#小程序顶部tab栏组件" class="headerlink" title="小程序顶部tab栏组件"></a>小程序顶部tab栏组件</h2><p>顶部导航栏的功能和底部tabbar功能相似，不过一个是原生小程序有的api，一个是自己定义的。</p>
+<p>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">import Taro, &#123; Component &#125; from &apos;@tarojs/taro&apos;</span><br><span class="line">import &#123; View, &#125; from &apos;@tarojs/components&apos;</span><br><span class="line">import &apos;./header-tab.less&apos;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">export default class headerTab extends Component &#123;</span><br><span class="line"></span><br><span class="line">  config = &#123;</span><br><span class="line">    navigationBarTitleText: &apos;首页&apos;</span><br><span class="line">  &#125;</span><br><span class="line">  constructor(props)&#123;</span><br><span class="line">    super(props)</span><br><span class="line">  //currentTab是当前默认选中的索引，我默认值设为1</span><br><span class="line">    this.state = &#123;</span><br><span class="line">      currentTab:1</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  //这个是我自己定义的方法，当用户点击不同的选项卡时，切换到不同的tab栏</span><br><span class="line">    switchNav (value,e)&#123;</span><br><span class="line">      var cur = e.target.dataset.current;</span><br><span class="line">      if(this.state.currentTab === cur)&#123;return false;&#125;</span><br><span class="line">      else&#123;</span><br><span class="line">        this.setState(&#123;</span><br><span class="line">          currentTab:cur</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">      this.props.onGetIndex(value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  render () &#123;</span><br><span class="line">    const&#123;navList&#125; = this.props;</span><br><span class="line">    return (</span><br><span class="line">      &lt;View className=&apos;swiper-tab&apos;&gt;</span><br><span class="line">        &#123;navList.map((nav) =&gt;</span><br><span class="line">          &lt;View className=&#123;this.state.currentTab===nav.key?&apos;active&apos;:&apos;normal&apos;&#125; data-current=&#123;nav.key&#125; onClick=&#123;this.switchNav.bind(this,nav.key)&#125; key=&apos;0&apos;&gt;&#123;nav.content&#125;&lt;/View&gt;</span><br><span class="line">        )&#125;</span><br><span class="line">    &lt;/View&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个组件主要注意几点：</p>
+<p>1.navList是我传入的数组对象，navList=[{key:1,content:’网购’},{key:2,content:’拼车’},{key:3,content:’外卖’},{key:4,content:’会员账号’},{key:5,content:’其他’}]}，key值是我自己加入进去的。<br>2.在我自己定义的方法，switchNav中传入了当前的索引值，这个对于本组件来说是没有影响的，但是对于页面来说，是为了将当前的索引值回传给页面。</p>
+<h2 id="拼购选项卡组件"><a href="#拼购选项卡组件" class="headerlink" title="拼购选项卡组件"></a>拼购选项卡组件</h2><p>由于有4种不同样式的选项卡组件，我做了4个选项卡，但是原理大同小异，就放一种的代码就行了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">import Taro, &#123; Component &#125; from &apos;@tarojs/taro&apos;</span><br><span class="line">import &#123; View,Image &#125; from &apos;@tarojs/components&apos;</span><br><span class="line">import &apos;./small-tab.less&apos;</span><br><span class="line">import &apos;../../img/full.png&apos;</span><br><span class="line"></span><br><span class="line">export default class SmallTab extends Component &#123;</span><br><span class="line"></span><br><span class="line">  constructor(props)&#123;</span><br><span class="line">    super(props)</span><br><span class="line">    this.state = &#123;</span><br><span class="line">      full:false</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    config = &#123;</span><br><span class="line">      navigationBarTitleText: &apos;首页&apos;</span><br><span class="line">    &#125;</span><br><span class="line">  //路由跳转</span><br><span class="line">  changPage(e)&#123;</span><br><span class="line">    var id = e.currentTarget.dataset.id</span><br><span class="line">    Taro.navigateTo(&#123;</span><br><span class="line">      url: &apos;../add/detail?id=&apos; + `$&#123;id&#125;`</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"> //检查拼单是否拼满</span><br><span class="line"> componentWillMount () &#123;</span><br><span class="line">  const &#123;orderList&#125;=this.props</span><br><span class="line">  if(orderList.numExist == orderList.numNeed)&#123;</span><br><span class="line">    this.setState(&#123;</span><br><span class="line">      full:true</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">  render () &#123;</span><br><span class="line">    const &#123;orderList&#125;=this.props</span><br><span class="line">    const &#123;full&#125; = this.state</span><br><span class="line">    return (</span><br><span class="line">      &lt;View scroll-y=&apos;true&apos; className=&apos;box&apos; onClick=&#123;this.changPage.bind(this)&#125; data-id=&#123;orderList.orderbuyID&#125;&gt;</span><br><span class="line">      &lt;View className=&apos;header&apos;&gt;</span><br><span class="line">      &#123;orderList.userPicture.map((value) =&gt; (</span><br><span class="line">      &lt;Image className=&apos;headSculpture&apos;</span><br><span class="line">        src=&#123;value&#125;</span><br><span class="line">        key=&apos;2&apos;</span><br><span class="line">      &gt;&lt;/Image&gt;</span><br><span class="line">        ))&#125;</span><br><span class="line"></span><br><span class="line">      &lt;View className=&apos;numberOfpinpin&apos; &gt;已拼&#123;orderList.numExist&#125;/&#123;orderList.numNeed&#125; </span><br><span class="line">      &lt;/View&gt;</span><br><span class="line">      &lt;/View&gt;</span><br><span class="line">      &lt;View className=&apos;cnt_box&apos;&gt;</span><br><span class="line">      &lt;Image className=&apos;description-picture&apos;</span><br><span class="line">        src=&#123;orderList.picture&#125;</span><br><span class="line">      &gt;&lt;/Image&gt;</span><br><span class="line">        &lt;View className=&apos;description&apos;&gt;</span><br><span class="line">        &lt;View className=&apos;title&apos;&gt;&#123;orderList.heading&#125;&lt;/View&gt;</span><br><span class="line">        &lt;View className=&apos;time&apos;&gt;下单时间：&#123;orderList.timeBuy&#125;&lt;/View&gt;</span><br><span class="line">        &lt;View className=&apos;place&apos;&gt;地点：&#123;orderList.location&#125;&lt;/View&gt;</span><br><span class="line">        &lt;/View&gt;</span><br><span class="line">        //动态赋予图片样式</span><br><span class="line">        &lt;Image className=&#123;full?&apos;pic&apos;:&apos;none&apos;&#125; src=&apos;../../img/full.png&apos;&gt;&lt;/Image&gt;</span><br><span class="line">        &lt;/View&gt;</span><br><span class="line">      &lt;/View&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这个选项卡样式相对还是简单的很多，主要注意的就是如何根据是否拼满动态赋予样式和运用map函数赋予数据。这里因为简单就不详细谈了。</p>
+<h1 id="页面功能"><a href="#页面功能" class="headerlink" title="页面功能"></a>页面功能</h1><h2 id="功能分类"><a href="#功能分类" class="headerlink" title="功能分类"></a>功能分类</h2><p>依然先跳过贪吃蛇..</p>
+<p>微信小程序因为功能比较多，就稍微提几个功能讲讲把</p>
+<ol>
+<li>上拉加载更多，下拉刷新</li>
+<li>评论功能</li>
+</ol>
+<h2 id="功能详解"><a href="#功能详解" class="headerlink" title="功能详解"></a>功能详解</h2><hr>
+<p>下拉刷新，上拉加载更多</p>
+<p>首先，得现在页面配置好上拉和下拉功能。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  navigationBarTitleText: &apos;华师拼单&apos;,</span><br><span class="line">  &quot;enablePullDownRefresh&quot;: true, </span><br><span class="line">  onReachBottomDistance:50</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后就可以调用上拉和下拉函数了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">  //刷新</span><br><span class="line">  onPullDownRefresh()&#123;</span><br><span class="line">    Taro.showNavigationBarLoading();</span><br><span class="line">    this.getIndex(this.state.index);</span><br><span class="line">    Taro.hideNavigationBarLoading();</span><br><span class="line">    Taro.stopPullDownRefresh();</span><br><span class="line">&#125;</span><br><span class="line">  //下拉加载更多</span><br><span class="line">  onReachBottom()&#123;</span><br><span class="line">    var hasNext=this.state.hasNext;</span><br><span class="line">    if(hasNext)&#123;</span><br><span class="line">      var list = this.state.orderList;</span><br><span class="line">      var num = this.state.pageNum;</span><br><span class="line">      num = num + 1;</span><br><span class="line">      if(this.state.index !==2 )&#123;</span><br><span class="line">      Fetch(`order/buy/list/?kind=$&#123;this.state.index&#125;&amp;page=$&#123;num&#125;`).then(data =&gt; &#123;</span><br><span class="line">        var datalist = data.data.orderList;</span><br><span class="line">        this.setState(&#123;</span><br><span class="line">          hasNext:data.data.hasNext,</span><br><span class="line">          pageNum:data.data.pageNum</span><br><span class="line">        &#125;)</span><br><span class="line">        return datalist;</span><br><span class="line">      &#125;).then(datalist =&gt;&#123;</span><br><span class="line">        list = list.concat(datalist);</span><br><span class="line">        this.setState(&#123;</span><br><span class="line">          orderList:list</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">      Fetch(`order/car/list/?page=$&#123;num&#125;`).then(data =&gt; &#123;</span><br><span class="line">        var datalist = data.data.orderList;</span><br><span class="line">        this.setState(&#123;</span><br><span class="line">          hasNext:data.data.hasNext,</span><br><span class="line">          pageNum:data.data.pageNum</span><br><span class="line">        &#125;)</span><br><span class="line">        return datalist;</span><br><span class="line">      &#125;).then(datalist =&gt;&#123;</span><br><span class="line">        list = list.concat(datalist);</span><br><span class="line">        this.setState(&#123;</span><br><span class="line">          orderList:list</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>刷新实现原理：显示刷新样式，调用后端api并储存加载，取消刷新样式，停止刷新。</p>
+<p>加载更多实现原理：请求后端api，数组数据拼接。</p>
+<hr>
+<p>评论功能</p>
+<p>原理很简单，现在render里写一个Input，当输入字符时动态改变state里remark的值，并且点击提交时调用上方方法，发送给后端数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">  submitForm() &#123;</span><br><span class="line">    var form = this.state.remark;    </span><br><span class="line">    if(form == &quot;&quot;)&#123;</span><br><span class="line">      Taro.showLoading(&apos;请输入评论&apos;);    </span><br><span class="line">      Taro.hideLoading();  </span><br><span class="line">      return;    </span><br><span class="line">    &#125;else&#123;</span><br><span class="line">    Fetch(`order/comments/buy/?orderID=$&#123;this.state.orderid&#125;`,</span><br><span class="line">    &#123;</span><br><span class="line">      userID:Taro.getStorageSync(&apos;openid&apos;),</span><br><span class="line">      content:form,</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;POST&quot;</span><br><span class="line">    ).then(</span><br><span class="line">      Fetch(`order/buy/?orderID=$&#123;this.state.orderid&#125;`).then(data =&gt;&#123;</span><br><span class="line">      this.setState(&#123;</span><br><span class="line">        comments:data.data.comments,</span><br><span class="line">        remark:&apos;&apos;</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;)</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="关于如何调用后端api"><a href="#关于如何调用后端api" class="headerlink" title="关于如何调用后端api"></a>关于如何调用后端api</h1><p>微信小程序自己有原生的api即Taro.request方法，帮助你调用后端api，你只需要稍微封装好即可。<br>代码在src/common/Fetch.js<br><a href="https://github.com/muxi-mini-project/2019-ccnupp-frontend" target="_blank" rel="noopener">仓库地址</a></p>
+<p>而在react中由于做的是小游戏，并没有涉及到和后端的交互，原理与上方类似，不细谈了。</p>
+<h1 id="关于react游戏实现"><a href="#关于react游戏实现" class="headerlink" title="关于react游戏实现"></a>关于react游戏实现</h1><p>现在我来谈谈游戏的实现办法和思路吧：</p>
+<p>1.首先画出背景</p>
+<ol start="2">
+<li>然后初始化初始蛇的位置，初始蛇为黑色</li>
+<li>蛇可以定时移动</li>
+<li>通过键盘控制蛇的移动</li>
+<li>显示食物为3种不同颜色</li>
+<li>蛇吃完食物变长，继续行走，蛇头撞到自己失败，重新开始</li>
+<li>蛇的每个部分统一行走，转换方向时，后一个按照前一个的轨迹进行行走</li>
+<li>超过边界时，重新开始</li>
+<li>暂停，游戏暂停，蛇不动</li>
+<li>开始，蛇继续行走</li>
+<li>计分，每吃一种颜色食物，相应的颜色进度条增加，并且蛇的颜色动态改变</li>
+<li>重新开始，回到初始化状态</li>
+<li>游戏胜利，关卡数加一，速度增加，游戏胜利条件改变</li>
+<li>优化界面，对页面布局进行优化</li>
+</ol>
+<p>这大概是最初的想法。</p>
+<p>后来又优化了一些功能：</p>
+<p>1.游戏胜利弹窗<br>2.吃多了颜色的会掉色，并且出现一段css动画<br>3.吃多了会闪烁</p>
+<p>代码太长了.但是我们两个前端都做了详细的注释，就不详细讲解了。</p>
+<p><a href="https://github.com/jonusis/eaty_snake" target="_blank" rel="noopener">贪吃蛇游戏仓库</a></p>
+<p>游戏我已经推到我的ghpage上了。<a href="https://jonusis.github.io/eaty_snake" target="_blank" rel="noopener">贪吃蛇游戏</a><br>欢迎试玩噢~</p>
+<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>微信小程序的项目大概用有近一个半月的时间，但是收获还真的挺多的。而贪吃蛇的游戏让我更加熟练了，更关键的是让我有一种在创造东西的感觉，这种感觉真的很好欸。前端还是在项目中学习，更容易收获一些知识。希望有机会能入手更多的项目把。</p>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者：<a href="http://yoursite.com">John Doe</a>
+            </p><p>原文链接：<a href="http://yoursite.com/2019/05/23/project summary/">http://yoursite.com/2019/05/23/project summary/</a>
+            </p><p>发表日期：<a href="http://yoursite.com/2019/05/23/project summary/">May 23rd 2019, 10:55:19 pm</a>
+            </p><p>更新日期：<a href="http://yoursite.com/2019/05/23/project summary/">May 26th 2019, 1:56:21 pm</a>
+            </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href="/2019/05/23/sorting-algorithm-share/" title="sorting algorithm share">
+                    <div class="nextTitle">sorting algorithm share</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2018/12/12/bubble-sort/" title="bubble sort">
+                    <div class="prevTitle">bubble sort</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:1624100548@qq.com" class="iconfont-archer email" title="email"></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/jonusis" class="iconfont-archer github" target="_blank" title="github"></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title="wechat">
+                  
+                  <img class="profile-qr" src="/assets/example_qr.png">
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事前准备"><span class="toc-number">2.</span> <span class="toc-text">事前准备</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#搭配环境"><span class="toc-number">2.1.</span> <span class="toc-text">搭配环境</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#整体思路"><span class="toc-number">3.</span> <span class="toc-text">整体思路</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#个人分工"><span class="toc-number">3.1.</span> <span class="toc-text">个人分工</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现功能"><span class="toc-number">3.2.</span> <span class="toc-text">实现功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分析思路"><span class="toc-number">3.3.</span> <span class="toc-text">分析思路</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#整体配置"><span class="toc-number">4.</span> <span class="toc-text">整体配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#tabbar、路由配置"><span class="toc-number">4.1.</span> <span class="toc-text">tabbar、路由配置</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#组件详情分析"><span class="toc-number">5.</span> <span class="toc-text">组件详情分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#小程序顶部tab栏组件"><span class="toc-number">5.1.</span> <span class="toc-text">小程序顶部tab栏组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#拼购选项卡组件"><span class="toc-number">5.2.</span> <span class="toc-text">拼购选项卡组件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#页面功能"><span class="toc-number">6.</span> <span class="toc-text">页面功能</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#功能分类"><span class="toc-number">6.1.</span> <span class="toc-text">功能分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#功能详解"><span class="toc-number">6.2.</span> <span class="toc-text">功能详解</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#关于如何调用后端api"><span class="toc-number">7.</span> <span class="toc-text">关于如何调用后端api</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#关于react游戏实现"><span class="toc-number">8.</span> <span class="toc-text">关于react游戏实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#结语"><span class="toc-number">9.</span> <span class="toc-text">结语</span></a></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 15
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/19</span><a class="archive-post-title" href="/2020/09/19/hello-world/">Hello World</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/19</span><a class="archive-post-title" href="/2020/09/19/annual-report-1/">[Untitled Post]</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/11</span><a class="archive-post-title" href="/2020/04/11/catalog-share/">catalog-share</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/16</span><a class="archive-post-title" href="/2020/02/16/first-share/">first-share</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/14</span><a class="archive-post-title" href="/2020/02/14/secd-share/">sec-share</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2019 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/01</span><a class="archive-post-title" href="/2019/11/01/dom-share/">dom share</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/23</span><a class="archive-post-title" href="/2019/10/23/sorting-algorithm-share-2/">sorting algorithm share-2</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/21</span><a class="archive-post-title" href="/2019/09/21/muxi-auth-fe-share/">muxi-auth-fe share</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href="/2019/06/08/css-share/">css share</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href="/2019/06/05/webpack-share/">webpack share</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/25</span><a class="archive-post-title" href="/2019/05/25/hackathon/">hackathon</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/23</span><a class="archive-post-title" href="/2019/05/23/newpage/">newpage</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/23</span><a class="archive-post-title" href="/2019/05/23/sorting-algorithm-share/">sorting algorithm share</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/23</span><a class="archive-post-title" href="/2019/05/23/project summary/">project wxapp</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/12</span><a class="archive-post-title" href="/2018/12/12/bubble-sort/">bubble sort</a>
+        </li>
+    
+    </ul></div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br>
+    1、请确保node版本大于6.2<br>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "John Doe"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+
